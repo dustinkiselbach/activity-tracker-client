@@ -1,10 +1,19 @@
 import React from 'react'
+import classnames from 'classnames'
 
-const TextField = ({ name, type, onChange }) => {
+const TextField = ({ name, title, type, onChange, error, info }) => {
   return (
-    <div className='form__text '>
+    <div
+      className='form__text'
+      className={classnames('form__text', {
+        // TODO change when errors are fixed
+        'is-invalid': error
+      })}
+    >
       <input type={type} name={name} onChange={onChange} required />
-      <label htmlFor={name}>{name}</label>
+      <label htmlFor={name}>{title}</label>
+      {info && <small>{info}</small>}
+      {error && <small>* {error}</small>}
     </div>
   )
 }

@@ -1,9 +1,9 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import './main.css'
 
 import Navbar from './components/layout/Navbar'
-import LoginPage from './components/pages/LoginPage'
 import LandingPage from './components/pages/LandingPage'
+import FormPage from './components/pages/FormPage'
 
 import UserState from './context/user/UserState'
 
@@ -16,7 +16,18 @@ function App () {
         <Navbar />
         <Switch>
           <Route path='/' exact component={LandingPage} />
-          <Route path='/login' exact component={LoginPage} />
+          <Route
+            path='/login'
+            render={props => <FormPage login={true} {...props} />}
+          />
+          <Route
+            path='/register'
+            render={props => <FormPage register={true} {...props} />}
+          />
+          <Route
+            path='/confirm-email'
+            render={props => <FormPage confirmEmail={true} {...props} />}
+          />
         </Switch>
       </Router>
     </UserState>

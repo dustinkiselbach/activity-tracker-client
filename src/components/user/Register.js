@@ -2,32 +2,40 @@ import React, { useState, useEffect, useContext } from 'react'
 import TextField from '../common/TextField'
 import UserContext from '../../context/user/userContext'
 
-const Login = ({ history }) => {
+const Register = ({ history }) => {
   const userContext = useContext(UserContext)
-  const { loginUser, isAuthenticated, errors } = userContext
-  const [fields, setFields] = useState({ email: '', password: '' })
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      history.push('/')
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps,
-  }, [isAuthenticated])
+  const { registerUser, errors, clearError } = userContext
+  const [fields, setFields] = useState({
+    name: '',
+    email: '',
+    password: '',
+    password_confirmation: ''
+  })
 
   const onChange = e => {
     setFields({ ...fields, [e.target.name]: e.target.value })
+
+    if (errors[e.target.name]) {
+      clearError(e.target.name)
+    }
   }
 
   const onSubmit = e => {
     e.preventDefault()
-    loginUser(fields)
+    registerUser(fields, history)
   }
 
   return (
     <div className='login-form my-2'>
-      <h2 className='title-secondary'>Welcome Back</h2>
-
+      <h2 className='title-secondary'>Register</h2>
       <form className='form' onSubmit={onSubmit}>
+        <TextField
+          name='name'
+          title='name'
+          type='name'
+          onChange={onChange}
+          error={errors.name}
+        />
         <TextField
           name='email'
           type='email'
@@ -42,7 +50,14 @@ const Login = ({ history }) => {
           onChange={onChange}
           error={errors.password}
         />
-        <button className='btn'>Login</button>
+        <TextField
+          name='password_confirmation'
+          type='password'
+          title='confirm password'
+          onChange={onChange}
+          error={errors.password_confirmation}
+        />
+        <button className='btn'>Register</button>
       </form>
       <div className='login-form__footer'>
         <small>Forgot your Password?</small>
@@ -51,4 +66,4 @@ const Login = ({ history }) => {
   )
 }
 
-export default Login
+export default Register
