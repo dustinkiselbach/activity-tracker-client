@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@300;400;700&family=Playfair+Display:wght@400;500;700&display=swap');
+
+@import './config';
+@import './base';
+@import './utilities';
+
+@import './components/navbar';
+@import './components/login-form';
+@import './components/feed';
+
+@import './pages/login-page';
+@import './pages/landing-page';

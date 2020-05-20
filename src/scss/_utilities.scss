@@ -1,0 +1,253 @@
+// Layout
+.container {
+  margin: 1rem 2rem;
+  padding: 1rem;
+}
+
+// TypoGraphy
+.title {
+  font-size: 2.5rem;
+  line-height: 1.2;
+  font-weight: 400;
+  letter-spacing: 0.1rem;
+}
+
+.title-secondary {
+  font-size: 2rem;
+  font-weight: 400;
+}
+
+.title-tertiary {
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+
+.lead {
+  font-size: 1.2rem;
+}
+
+// buttons
+.btn {
+  display: inline-block;
+  border: none;
+  outline: none;
+  background-color: $color-primary;
+  color: $color-light;
+  font-size: 1rem;
+  font-family: inherit;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: all 0.2s;
+  &:hover {
+    background-color: darken($color-primary, 15%);
+  }
+  &:active {
+    transform: scale(1.02);
+  }
+
+  &-secondary {
+    @include set-background($color-light);
+    border: $color-grey 1px solid;
+    &:hover {
+      background-color: darken($color-light, 15%);
+    }
+  }
+  &-success {
+    @include set-background($success-color);
+    &:hover {
+      background-color: darken($success-color, 15%);
+    }
+  }
+  &-danger {
+    @include set-background($danger-color);
+    &:hover {
+      background-color: darken($danger-color, 15%);
+    }
+  }
+}
+
+// secondary buttons
+.btn-small {
+  display: inline-block;
+  border: none;
+  outline: none;
+  color: $color-dark;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  span {
+    font-size: 1rem;
+  }
+  &:hover {
+    background-color: darken($color-light, 25);
+  }
+}
+
+// card
+.card {
+  background-color: $color-light;
+  box-shadow: 0 0.4rem 0.8rem rgba(black, 0.1);
+  border-radius: 5px;
+  position: relative;
+  & .share {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    cursor: pointer;
+  }
+
+  &__main {
+    display: grid;
+    grid-template-columns: 6rem 1fr;
+    &--left {
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-evenly;
+      & img {
+        height: 4rem;
+        width: 4rem;
+        border-radius: 5px;
+      }
+    }
+    &--right {
+      h3 {
+        font-weight: 400;
+        line-height: 1;
+      }
+
+      h2 {
+        font-weight: 700;
+      }
+
+      padding: 1rem;
+      & .stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      & .stat {
+        font-size: 1.2rem;
+        font-weight: 400;
+        line-height: 1;
+      }
+    }
+  }
+  &__footer {
+    padding: 1rem;
+    position: relative;
+
+    &--btns {
+      display: flex;
+      justify-content: flex-end;
+      button {
+        &:not(:last-child) {
+          margin-right: 1rem;
+        }
+      }
+    }
+    &::after {
+      content: '';
+      position: absolute;
+      background-color: rgba($color-dark, 0.2);
+      width: 100%;
+      height: 1px;
+      top: 0;
+      right: 0;
+    }
+  }
+  & small {
+    font-size: 0.9rem;
+  }
+}
+
+//Form
+.form {
+  display: flex;
+  flex-direction: column;
+
+  &__text {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    &:not(:last-child) {
+      margin-bottom: 1.5rem;
+    }
+
+    input {
+      border: none;
+      position: relative;
+      font-family: inherit;
+      font-size: 1.2rem;
+      border-bottom: solid 1px rgba($color-dark, 0.5);
+      background-color: inherit;
+      outline: none;
+      padding: 0.5rem 0;
+    }
+
+    label {
+      position: absolute;
+      width: 100%;
+      top: 5px;
+      left: 0;
+      text-transform: uppercase;
+      color: rgba($color-dark, 0.5);
+      font-weight: 400;
+      transition: all 0.5s;
+      pointer-events: none;
+    }
+
+    input:focus + label,
+    input:valid + label {
+      transform: translateY(-30px);
+      transition: all 0.5s;
+    }
+  }
+  & .is-invalid {
+    & input {
+      color: $danger-color;
+      border-bottom: solid 1px rgba($danger-color, 0.5);
+    }
+    & label {
+      color: $danger-color;
+    }
+    & small {
+      color: $danger-color;
+    }
+  }
+}
+
+// dark line
+.dark-line {
+  border-bottom: rgba($color-dark, 0.5) 1px solid;
+}
+
+// Margin & Padding
+$spaceamounts: (1, 2, 3, 4, 5);
+
+@each $space in $spaceamounts {
+  // All around margin
+  .m-#{$space} {
+    margin: #{$space}rem;
+  }
+  // Vertical Margin
+  .my-#{$space} {
+    margin: #{$space}rem 0;
+  }
+
+  // All around padding
+  .p-#{$space} {
+    padding: #{$space}rem;
+  }
+  // Vertical Margin
+  .py-#{$space} {
+    padding: #{$space}rem 0;
+  }
+}

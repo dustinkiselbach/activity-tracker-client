@@ -1,0 +1,10 @@
+.feed {
+  grid-template-columns: 1fr 1fr;
+  display: grid;
+  grid-gap: 1rem;
+}
+
+.feed-middle {
+  height: 50vh;
+  overflow-y: auto;
+}

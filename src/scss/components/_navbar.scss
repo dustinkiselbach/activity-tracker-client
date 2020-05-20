@@ -1,0 +1,41 @@
+.navbar {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border-bottom: rgba($color-dark, 0.1) 2px solid;
+  box-shadow: 0 0.2rem 0.4rem rgba(black, 0.1);
+  background-color: $color-light;
+  &__brand {
+    font-size: 1.6rem;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    span {
+      margin-left: 0.5rem;
+      font-size: 2rem;
+      transform: rotate(24deg);
+    }
+  }
+
+  &__nav {
+    display: flex;
+    margin-left: 2rem;
+
+    &--item {
+      &:not(:last-child) {
+        margin-right: 2rem;
+      }
+    }
+  }
+
+  &__dashboard {
+    margin-left: auto;
+    display: flex;
+    &--item {
+      &:not(:last-child) {
+        margin-right: 2rem;
+      }
+    }
+  }
+}

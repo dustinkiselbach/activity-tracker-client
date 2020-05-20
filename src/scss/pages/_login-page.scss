@@ -1,0 +1,20 @@
+.login-page {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-areas: 'left middle right';
+  grid-template-rows: 1fr 1fr;
+  height: calc(100vh - 58px);
+  background-image: linear-gradient(
+      rgba(white, 0) 80%,
+      rgba($color-background, 1) 66.7%
+    ),
+    linear-gradient(
+      135deg,
+      rgba($color-primary, 0.3) 33.33%,
+      rgba($color-secondary, 1) 33.35%
+    ),
+    url('./media/dude2.jpg');
+
+  background-size: cover;
+  background-position: top;
+}

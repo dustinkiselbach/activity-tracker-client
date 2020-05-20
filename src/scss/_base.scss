@@ -1,0 +1,41 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-weight: 300;
+}
+
+body {
+  font-family: 'Jost', sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  // temporary background color
+  background-color: #f7f7fa;
+  color: $color-dark;
+}
+
+a {
+  color: $color-primary;
+  text-decoration: none;
+  font-weight: 400;
+}
+
+ul {
+  list-style: none;
+  & a {
+    color: $color-dark;
+    &:hover {
+      color: $color-primary;
+    }
+  }
+}
+
+img {
+  width: 100%;
+}
+
+// Layout
+.feed-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+}
