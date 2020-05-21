@@ -1,5 +1,5 @@
 .confirm-email {
-  padding: 4rem 2rem;
+  padding: 2rem;
   grid-area: middle;
   position: relative;
   background-color: $color-light;
@@ -9,7 +9,7 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  transition: all 0.5s ease-in-out;
+  height: 20rem;
 
   &__top {
     display: flex;
@@ -17,7 +17,6 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    transition: all 0.5s ease-in-out;
 
     p {
       padding: 1rem;
@@ -36,6 +35,9 @@
       right: 0;
     }
   }
-  &:hover &__top::after {
+  &__bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 }

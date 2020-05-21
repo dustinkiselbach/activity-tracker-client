@@ -10,7 +10,7 @@ export default (state, action) => {
     case SET_CURRENT_USER:
       return {
         ...state,
-        isAuthenticated: true,
+        isAuthenticated: Object.keys(action.payload).length > 0 ? true : false,
         user: action.payload,
         errors: {}
       }
@@ -20,10 +20,12 @@ export default (state, action) => {
         errors: action.payload
       }
     case CLEAR_ERROR:
-      // THERE MUST BE A WAY TO DO THIS HAHAHAHAHAH
+      // This is janky not sure of a solution
+      let newErrors = { ...state.errors }
+      newErrors[action.payload] = undefined
       return {
         ...state,
-        errors: {}
+        errors: newErrors
       }
     default:
       return state

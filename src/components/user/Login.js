@@ -1,21 +1,16 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import TextField from '../common/TextField'
-import UserContext from '../../context/user/userContext'
 
-const Login = ({ history }) => {
-  const userContext = useContext(UserContext)
-  const { loginUser, isAuthenticated, errors } = userContext
+const Login = ({ motion, variants, loginUser, errors, clearError }) => {
   const [fields, setFields] = useState({ email: '', password: '' })
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      history.push('/')
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps,
-  }, [isAuthenticated])
 
   const onChange = e => {
     setFields({ ...fields, [e.target.name]: e.target.value })
+
+    if (errors[e.target.name]) {
+      clearError(e.target.name)
+    }
   }
 
   const onSubmit = e => {
@@ -24,7 +19,13 @@ const Login = ({ history }) => {
   }
 
   return (
-    <div className='login-form my-2'>
+    <motion.div
+      initial='hidden'
+      animate='visible'
+      exit='exit'
+      variants={variants}
+      className='login-form my-2'
+    >
       <h2 className='title-secondary'>Welcome Back</h2>
 
       <form className='form' onSubmit={onSubmit}>
@@ -45,9 +46,12 @@ const Login = ({ history }) => {
         <button className='btn'>Login</button>
       </form>
       <div className='login-form__footer'>
-        <small>Forgot your Password?</small>
+        <small>
+          Forgot your Password?{' '}
+          <Link to='/reset-password'>Reset your password</Link>
+        </small>
       </div>
-    </div>
+    </motion.div>
   )
 }
 

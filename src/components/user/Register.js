@@ -1,10 +1,15 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState } from 'react'
 import TextField from '../common/TextField'
-import UserContext from '../../context/user/userContext'
+import { Link } from 'react-router-dom'
 
-const Register = ({ history }) => {
-  const userContext = useContext(UserContext)
-  const { registerUser, errors, clearError } = userContext
+const Register = ({
+  history,
+  motion,
+  variants,
+  registerUser,
+  errors,
+  clearError
+}) => {
   const [fields, setFields] = useState({
     name: '',
     email: '',
@@ -26,7 +31,13 @@ const Register = ({ history }) => {
   }
 
   return (
-    <div className='login-form my-2'>
+    <motion.div
+      initial='hidden'
+      animate='visible'
+      exit='exit'
+      variants={variants}
+      className='login-form my-2'
+    >
       <h2 className='title-secondary'>Register</h2>
       <form className='form' onSubmit={onSubmit}>
         <TextField
@@ -60,9 +71,11 @@ const Register = ({ history }) => {
         <button className='btn'>Register</button>
       </form>
       <div className='login-form__footer'>
-        <small>Forgot your Password?</small>
+        <small>
+          If you have already registered <Link to='/login'>Sign in</Link>
+        </small>
       </div>
-    </div>
+    </motion.div>
   )
 }
 

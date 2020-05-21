@@ -1,7 +1,23 @@
-import React from 'react'
+import React, { useEffect, useContext } from 'react'
 import { Link } from 'react-router-dom'
+import UserContext from '../../context/user/userContext'
 
-const LandingPage = () => {
+const LandingPage = ({ location, history }) => {
+  const userContext = useContext(UserContext)
+
+  const { confirmAccount } = userContext
+
+  const qs = new URLSearchParams(location.search)
+
+  useEffect(() => {
+    if (qs.get('confirmation_token')) {
+      confirmAccount(qs.get('confirmation_token'))
+
+      history.push('/login')
+    } else if (qs.get('reset_password_token')) {
+      history.push(`/reset-password/${qs.get('reset_password_token')}`)
+    }
+  }, [])
   return (
     <section className='landing'>
       <div className='landing__top'>

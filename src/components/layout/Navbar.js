@@ -1,7 +1,36 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
+import UserContext from '../../context/user/userContext'
 
 const Navbar = () => {
+  const userContext = useContext(UserContext)
+
+  const { user, isAuthenticated, logoutUser } = userContext
+
+  const authLinks = (
+    <>
+      <li className='navbar__dashboard--item'>
+        <Link to='/feed'>Profile</Link>
+      </li>
+      <li className='navbar__dashboard--item'>
+        <a href='/#' onClick={logoutUser}>
+          Logout
+        </a>
+      </li>
+    </>
+  )
+
+  const guestLinks = (
+    <>
+      <li className='navbar__dashboard--item'>
+        <Link to='/register'>Register</Link>
+      </li>
+      <li className='navbar__dashboard--item'>
+        <Link to='/login'>Login</Link>
+      </li>
+    </>
+  )
+
   return (
     <nav className='navbar'>
       <a href='/#' className='navbar__brand'>
@@ -20,12 +49,7 @@ const Navbar = () => {
         </li>
       </ul>
       <ul className='navbar__dashboard'>
-        <li className='navbar__dashboard--item'>
-          <a href='/#'>User</a>
-        </li>
-        <li className='navbar__dashboard--item'>
-          <Link to='/login'>login</Link>
-        </li>
+        {isAuthenticated ? authLinks : guestLinks}
       </ul>
     </nav>
   )
