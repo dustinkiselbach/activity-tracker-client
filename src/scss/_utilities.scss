@@ -224,6 +224,17 @@
   }
 }
 
+// spinner
+.spinner {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  font-size: 2rem;
+  padding: 2rem;
+  background-color: inherit;
+}
+
 // dark line
 .dark-line {
   border-bottom: rgba($color-dark, 0.5) 1px solid;

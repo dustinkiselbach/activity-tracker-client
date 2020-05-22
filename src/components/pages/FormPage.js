@@ -36,7 +36,7 @@ const FormPage = ({
 
   useEffect(() => {
     if (isAuthenticated) {
-      history.push('/')
+      history.push('/dashboard')
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps,

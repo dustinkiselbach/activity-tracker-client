@@ -1,21 +1,26 @@
 import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import UserContext from '../../context/user/userContext'
+import AlertContext from '../../context/alert/alertContext'
 
 const Navbar = () => {
   const userContext = useContext(UserContext)
 
-  const { user, isAuthenticated, logoutUser } = userContext
+  const { isAuthenticated, logoutUser } = userContext
+
+  const alertContext = useContext(AlertContext)
+
+  const { setAlert } = alertContext
 
   const authLinks = (
     <>
       <li className='navbar__dashboard--item'>
-        <Link to='/feed'>Profile</Link>
+        <Link to='/dashboard'>Dashboard</Link>
       </li>
       <li className='navbar__dashboard--item'>
-        <a href='/#' onClick={logoutUser}>
+        <Link to='/login' onClick={logoutUser}>
           Logout
-        </a>
+        </Link>
       </li>
     </>
   )
@@ -38,8 +43,14 @@ const Navbar = () => {
         <span className='material-icons'>explore</span>
       </a>
       <ul className='navbar__nav'>
-        <li className='navbar__nav--item'>
-          <a href='/#'>Test</a>
+        <li
+          onClick={e => {
+            e.preventDefault()
+            setAlert('This is a sample alert for test', 'info')
+          }}
+          className='navbar__nav--item'
+        >
+          <a href='/#'>Alert</a>
         </li>
         <li className='navbar__nav--item'>
           <a href='/#'>Test</a>

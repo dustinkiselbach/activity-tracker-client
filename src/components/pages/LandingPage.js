@@ -17,6 +17,7 @@ const LandingPage = ({ location, history }) => {
     } else if (qs.get('reset_password_token')) {
       history.push(`/reset-password/${qs.get('reset_password_token')}`)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   return (
     <section className='landing'>

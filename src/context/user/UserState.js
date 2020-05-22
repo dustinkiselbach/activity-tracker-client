@@ -44,6 +44,7 @@ const UserState = props => {
         window.location.href = '/login'
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   // Register User
@@ -103,7 +104,7 @@ const UserState = props => {
         { email }
       )
       console.log(res)
-      setAlert('An email has been sent with a token to reset your password')
+      setAlert('Reset link sent to your email')
     } catch (err) {
       dispatch({
         type: USER_ERROR,
@@ -120,7 +121,7 @@ const UserState = props => {
         newPassword
       )
       console.log(res)
-      setAlert('Your password has been reset')
+      setAlert('Password has been reset')
     } catch (err) {
       dispatch({
         type: USER_ERROR,

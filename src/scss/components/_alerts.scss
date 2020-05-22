@@ -1,12 +1,18 @@
 .alerts {
   position: fixed;
-  background-color: rgba($color-dark, 0.8);
+  background-color: rgba($color-dark, 1);
   color: $color-light;
   left: 50%;
   top: 10px;
-  transform: translateX(-50%);
+  // transform: translateX(-50%);
   z-index: 100;
-  padding: 2rem;
-  box-shadow: 0 0.4rem 0.8rem rgba(black, 0.1);
+  padding: 1rem;
+  box-shadow: 0 0.5rem 1rem rgba(black, 0.3);
   border-radius: 5px;
+  width: 20rem;
+
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
 }
