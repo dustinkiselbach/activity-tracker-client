@@ -2,11 +2,12 @@ import React, { useReducer } from 'react'
 import axios from 'axios'
 import ActivitiesContext from './activitiesContext'
 import activitiesReducer from './activitiesReducer'
-import { GET_ACTIVITIES, SET_LOADING } from '../types'
+import { GET_ACTIVITIES, GET_ACTIVITY, SET_LOADING } from '../types'
 
 const ActivitiesState = props => {
   const initialState = {
     activities: [],
+    activity: null,
     loading: false
   }
 
@@ -33,7 +34,7 @@ const ActivitiesState = props => {
       const res = await axios.get(
         `https://agile-retreat-42559.herokuapp.com//api/v1/activities/${id}`
       )
-
+      dispatch({ type: GET_ACTIVITY, payload: res.data })
       console.log(res)
     } catch (err) {
       console.log(err.response.data)
@@ -73,6 +74,7 @@ const ActivitiesState = props => {
     <ActivitiesContext.Provider
       value={{
         activities: state.activities,
+        activity: state.activity,
         loading: state.loading,
         getActivities,
         getActivity,

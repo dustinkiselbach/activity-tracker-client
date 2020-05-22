@@ -1,9 +1,4 @@
-import {
-  REGISTER_USER,
-  SET_CURRENT_USER,
-  USER_ERROR,
-  CLEAR_ERROR
-} from '../types'
+import { SET_CURRENT_USER, USER_ERROR, CLEAR_ERROR } from '../types'
 
 export default (state, action) => {
   switch (action.type) {
@@ -12,6 +7,7 @@ export default (state, action) => {
         ...state,
         isAuthenticated: Object.keys(action.payload).length > 0 ? true : false,
         user: action.payload,
+        loading: false,
         errors: {}
       }
     case USER_ERROR:
@@ -27,6 +23,7 @@ export default (state, action) => {
         ...state,
         errors: newErrors
       }
+
     default:
       return state
   }

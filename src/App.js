@@ -7,6 +7,7 @@ import LandingPage from './components/pages/LandingPage'
 import FormPage from './components/pages/FormPage'
 import IntergrationAuth from './components/pages/IntergrationAuth'
 import Dashboard from './components/dashboard/Dashboard'
+import Activity from './components/activity/Activity'
 
 import UserState from './context/user/UserState'
 import AlertState from './context/alert/AlertState'
@@ -54,6 +55,7 @@ function App () {
               <Route path='/test' component={Spinner} />
 
               <PrivateRoute exact path='/dashboard' component={Dashboard} />
+              <PrivateRoute exact path='/activity/:id' component={Activity} />
             </Switch>
           </Router>
         </ActivitiesState>

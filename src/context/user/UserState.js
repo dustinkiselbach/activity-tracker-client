@@ -13,7 +13,8 @@ const UserState = props => {
   const initialState = {
     user: null,
     isAuthenticated: false,
-    errors: {}
+    errors: {},
+    loading: true
   }
 
   const [state, dispatch] = useReducer(userReducer, initialState)
@@ -25,6 +26,7 @@ const UserState = props => {
   // onrerender check if user is logged in
   useEffect(() => {
     // Check for token
+
     if (localStorage.jwtToken) {
       // Set auth token header auth
       setAuthToken(localStorage.jwtToken)
@@ -185,6 +187,7 @@ const UserState = props => {
         user: state.user,
         isAuthenticated: state.isAuthenticated,
         errors: state.errors,
+        loading: state.loading,
         registerUser,
         loginUser,
         logoutUser,

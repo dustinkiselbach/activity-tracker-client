@@ -1,12 +1,35 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import Moment from 'react-moment'
 import moment from 'moment'
+import {
+  metersToMiles,
+  toMilesPerHour,
+  toKmPerHour,
+  toMinutesPer
+} from '../../utils/unitConversions'
 
-const DashboardCard = ({ activity, user }) => {
-  const { name, created_at, activity_type, activity_time, distance } = activity
+const DashboardCard = ({ activity, user, imperialToggle }) => {
+  const {
+    name,
+    id,
+    created_at,
+    activity_type,
+    activity_time,
+    distance
+  } = activity
 
+  // metres/s to km/h
+  const timeKm = toKmPerHour(activity_time, distance)
+
+  // if imperialToggle the user wants imperialUnits
+  const distanceMiles = metersToMiles(distance)
+  const timeMiles = toMilesPerHour(activity_time, distance)
+  // converting to km and minutes per mile or kilometer
+  const minPerMile = toMinutesPer(timeMiles)
+  const minPerKm = toMinutesPer(timeKm)
+  // to format seconds into hours minutes and seconds
   const duration = moment.duration(activity_time, 'seconds')
-
   const activityLength = duration.format('hh:mm:ss')
 
   return (
@@ -14,10 +37,7 @@ const DashboardCard = ({ activity, user }) => {
       <span className='material-icons share'>share</span>
       <div className='card__main'>
         <div className='card__main--left'>
-          <img
-            src='https://previews.123rf.com/images/maridav/maridav1801/maridav180100315/93625825-road-bike-cyclist-man-sport-athlete-training-cardio-workout-on-racing-bicycle-male-biker-biking-outd.jpg'
-            alt='card image'
-          />
+          <img src='https://previews.123rf.com/images/maridav/maridav1801/maridav180100315/93625825-road-bike-cyclist-man-sport-athlete-training-cardio-workout-on-racing-bicycle-male-biker-biking-outd.jpg' />
           <span className='material-icons'>
             {activity_type === 'Run' ? 'directions_run' : 'directions_bike'}
           </span>
@@ -27,11 +47,17 @@ const DashboardCard = ({ activity, user }) => {
           <small>
             <Moment format='MM-DD-YYYY hh:mm a'>{created_at}</Moment>
           </small>
-          <h2>{name ? name : activity_type}</h2>
+          <h2>
+            <Link to={`/activity/${id}`}>{name ? name : activity_type}</Link>
+          </h2>
           <div className='stats'>
             <div className='stats--item'>
               <small>Distance</small>
-              <div className='stat'>{distance} meters</div>
+              <div className='stat'>
+                {imperialToggle
+                  ? distanceMiles + ' mi'
+                  : distance / 1000 + ' km'}
+              </div>
             </div>
             <div className='stats--item'>
               <small>Time</small>
@@ -40,7 +66,13 @@ const DashboardCard = ({ activity, user }) => {
             <div className='stats--item'>
               <small>Pace</small>
               <div className='stat'>
-                {Math.round((activity_time / distance) * 100) / 100} m/s
+                {activity_type === 'Run'
+                  ? imperialToggle
+                    ? minPerMile + ' min/m'
+                    : minPerKm + ' min/km'
+                  : imperialToggle
+                  ? timeMiles + ' mph'
+                  : timeKm + ' km/h'}
               </div>
             </div>
           </div>
