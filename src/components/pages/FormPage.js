@@ -8,10 +8,27 @@ import UserContext from '../../context/user/userContext'
 
 import { motion, AnimatePresence } from 'framer-motion'
 
+const transition = {
+  duration: 0.2,
+  ease: 'easeInOut'
+}
+
 const variants = {
-  visible: { y: 0, opacity: 1 },
-  hidden: { y: -300, opacity: 0 },
-  exit: { y: 300, opacity: 0 }
+  visible: {
+    x: 0,
+    opacity: 1,
+    transition
+  },
+  hidden: {
+    x: -200,
+    opacity: 0,
+    transition
+  },
+  exit: {
+    x: 200,
+    opacity: 0,
+    transition
+  }
 }
 
 const FormPage = ({
@@ -44,7 +61,7 @@ const FormPage = ({
 
   return (
     <section className='login-page'>
-      <AnimatePresence>
+      <AnimatePresence initial={false} exitBeforeEnter>
         {login && (
           <Login
             motion={motion}
@@ -52,6 +69,7 @@ const FormPage = ({
             loginUser={loginUser}
             errors={errors}
             clearError={clearError}
+            key='login'
           />
         )}
         {register && (
@@ -62,6 +80,7 @@ const FormPage = ({
             registerUser={registerUser}
             errors={errors}
             clearError={clearError}
+            key='register'
           />
         )}
         {confirmEmail && (
@@ -70,6 +89,7 @@ const FormPage = ({
             variants={variants}
             match={match}
             resendConfirmation={resendConfirmation}
+            key='confirm email'
           />
         )}
         {resetPassword && (
@@ -82,6 +102,7 @@ const FormPage = ({
             finalResetPassword={finalResetPassword}
             errors={errors}
             clearError={clearError}
+            key='reset password'
           />
         )}
       </AnimatePresence>

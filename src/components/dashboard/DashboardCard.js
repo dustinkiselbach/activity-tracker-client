@@ -37,7 +37,7 @@ const DashboardCard = ({ activity, user, imperialToggle }) => {
       <span className='material-icons share'>share</span>
       <div className='card__main'>
         <div className='card__main--left'>
-          <img src='https://previews.123rf.com/images/maridav/maridav1801/maridav180100315/93625825-road-bike-cyclist-man-sport-athlete-training-cardio-workout-on-racing-bicycle-male-biker-biking-outd.jpg' />
+          <img src='http://203.153.40.19/bct/img/user.png' />
           <span className='material-icons'>
             {activity_type === 'Run' ? 'directions_run' : 'directions_bike'}
           </span>

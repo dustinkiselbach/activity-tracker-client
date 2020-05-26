@@ -21,10 +21,24 @@
   &__nav {
     display: flex;
     margin-left: 2rem;
+    position: relative;
 
     &--item {
+      padding: 0 1rem;
       &:not(:last-child) {
         margin-right: 2rem;
+      }
+
+      &:hover .sublist {
+        display: block;
+      }
+
+      & .sublist {
+        display: none;
+        position: absolute;
+        transform: translateX(-1rem);
+        padding: 1rem;
+        background-color: $color-light;
       }
     }
   }

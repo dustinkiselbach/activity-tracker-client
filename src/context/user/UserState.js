@@ -7,14 +7,21 @@ import jwt_decode from 'jwt-decode'
 
 import AlertContext from '../../context/alert/alertContext'
 
-import { SET_CURRENT_USER, USER_ERROR, CLEAR_ERROR } from '../types'
+import {
+  SET_CURRENT_USER,
+  USER_ERROR,
+  SET_AUTHENTICATING,
+  CLEAR_ERROR,
+  REGISTER_USER
+} from '../types'
 
 const UserState = props => {
   const initialState = {
     user: null,
     isAuthenticated: false,
     errors: {},
-    loading: true
+    loading: true,
+    authenticating: false
   }
 
   const [state, dispatch] = useReducer(userReducer, initialState)
@@ -51,9 +58,13 @@ const UserState = props => {
 
   // Register User
   const registerUser = async (user, history) => {
+    setAuthenticating()
     try {
       await axios.post('https://agile-retreat-42559.herokuapp.com//users', user)
       history.push(`/confirm-email/${user.email}`)
+      dispatch({
+        type: REGISTER_USER
+      })
     } catch (err) {
       dispatch({
         type: USER_ERROR,
@@ -64,6 +75,7 @@ const UserState = props => {
 
   // Login User
   const loginUser = async userData => {
+    setAuthenticating()
     try {
       const res = await axios.post(
         'https://agile-retreat-42559.herokuapp.com//users/sign_in',
@@ -181,6 +193,13 @@ const UserState = props => {
     })
   }
 
+  // set authenticating
+  const setAuthenticating = () => {
+    dispatch({
+      type: SET_AUTHENTICATING
+    })
+  }
+
   return (
     <UserContext.Provider
       value={{
@@ -188,6 +207,7 @@ const UserState = props => {
         isAuthenticated: state.isAuthenticated,
         errors: state.errors,
         loading: state.loading,
+        authenticating: state.authenticating,
         registerUser,
         loginUser,
         logoutUser,

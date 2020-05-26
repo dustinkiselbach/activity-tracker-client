@@ -3,6 +3,7 @@ export const REGISTER_USER = 'REGISTER_USER'
 export const USER_ERROR = 'USER_ERROR'
 export const SET_CURRENT_USER = 'SET_CURRENT_USER'
 export const CLEAR_ERROR = 'CLEAR_ERROR'
+export const SET_AUTHENTICATING = 'SET_AUTHENTICATING'
 // Acitivities Types
 export const GET_ACTIVITIES = 'GET_ACTIVITIES'
 export const GET_ACTIVITY = 'GET_ACTIVITY'

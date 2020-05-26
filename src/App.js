@@ -3,6 +3,7 @@ import './main.css'
 
 import Navbar from './components/layout/Navbar'
 import Alerts from './components/layout/Alerts'
+import Loading from './components/layout/Loading'
 import LandingPage from './components/pages/LandingPage'
 import FormPage from './components/pages/FormPage'
 import IntergrationAuth from './components/pages/IntergrationAuth'
@@ -25,6 +26,7 @@ function App () {
           <Router>
             <Navbar />
             <Alerts />
+            <Loading />
             <Switch>
               <Route path='/' exact component={LandingPage} />
               <Route
