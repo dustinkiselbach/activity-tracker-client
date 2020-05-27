@@ -181,18 +181,23 @@
       margin-bottom: 1.5rem;
     }
 
-    input {
+    & input {
       border: none;
       position: relative;
       font-family: inherit;
       font-size: 1.2rem;
       border-bottom: solid 1px rgba($color-dark, 0.5);
-      background-color: inherit;
+      // background-color: inherit;
+      background-color: $color-background;
       outline: none;
       padding: 0.5rem 0;
+
+      &:focus {
+        border-bottom: solid 2px rgba($color-primary, 1);
+      }
     }
 
-    label {
+    & label {
       position: absolute;
       width: 100%;
       top: 5px;
@@ -204,8 +209,8 @@
       pointer-events: none;
     }
 
-    input:focus + label,
-    input:valid + label {
+    & input:focus + label,
+    & input:valid + label {
       transform: translateY(-30px);
       transition: all 0.5s;
     }
@@ -316,6 +321,47 @@
       transform: translate(24px, 0);
     }
   }
+}
+
+// table
+.splits-table {
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: collapse;
+  background-color: $color-light;
+  overflow: hidden;
+  box-shadow: 0 0.4rem 0.8rem rgba(black, 0.1);
+
+  & tbody tr {
+    &:hover {
+      background-color: rgba($color-dark, 0.2);
+    }
+  }
+
+  & caption {
+    font-size: 2rem;
+  }
+
+  & thead {
+    font-weight: 700;
+    background-color: rgba($color-dark, 0.2);
+    border-bottom: 1px solid rgba($color-dark, 0.75);
+  }
+
+  & thead th:nth-child(1) {
+    width: 10%;
+  }
+
+  & tbody tr:not(:last-child) {
+    border-bottom: 1px solid rgba($color-dark, 0.2);
+  }
+}
+
+// graph
+.graph {
+  margin-top: 2rem;
+  width: 90vw;
+  height: 200px;
 }
 
 // dark line

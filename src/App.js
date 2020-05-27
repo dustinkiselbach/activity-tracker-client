@@ -16,7 +16,6 @@ import ActivitiesState from './context/activities/ActivitiesState'
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import PrivateRoute from './components/common/PrivateRoute'
-import Spinner from './components/common/Spinner'
 
 function App () {
   return (
@@ -53,11 +52,13 @@ function App () {
                 path='/auth/:provider/:token'
                 component={IntergrationAuth}
               />
-              {/* // TEST ROUTE */}
-              <Route path='/test' component={Spinner} />
 
               <PrivateRoute exact path='/dashboard' component={Dashboard} />
-              <PrivateRoute exact path='/activity/:id' component={Activity} />
+              <PrivateRoute
+                exact
+                path='/activity/:id,:unit'
+                component={Activity}
+              />
             </Switch>
           </Router>
         </ActivitiesState>

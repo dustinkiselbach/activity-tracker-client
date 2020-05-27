@@ -1,8 +1,7 @@
-import React, { useState, useRef, useContext } from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import UserContext from '../../context/user/userContext'
 import AlertContext from '../../context/alert/alertContext'
-import classnames from 'classnames'
 
 const Navbar = () => {
   const userContext = useContext(UserContext)
@@ -57,16 +56,33 @@ const Navbar = () => {
           </li>
           {/* EXAMPLE OF POSSIBLE DROPDOWN MENU */}
           <li className='navbar__nav--item'>
-            <a href='/#'>fart &darr;</a>
-            <li className='sublist'>
-              <ul>fart</ul>
-              <ul>farting again</ul>
-              <ul>farting thrice</ul>
-            </li>
+            <a href='/#'>fart</a>
+            <ul className='sublist'>
+              <li>
+                <a href='#/'>testlink</a>
+              </li>
+              <li>
+                <a href='#/'>testlink</a>
+              </li>
+              <li>
+                <a href='#/'>farting69</a>
+              </li>
+            </ul>
           </li>
           {/* EXAMPLE END */}
           <li className='navbar__nav--item'>
-            <a href='/#'>Test</a>
+            <a href='/#'>fart</a>
+            <ul className='sublist'>
+              <li>
+                <a href='#/'>testlink</a>
+              </li>
+              <li>
+                <a href='#/'>cheese</a>
+              </li>
+              <li>
+                <a href='#/'>wookie</a>
+              </li>
+            </ul>
           </li>
         </ul>
         <ul className='navbar__dashboard'>

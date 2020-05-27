@@ -55,7 +55,7 @@
           line-height: 1;
         }
 
-        & .time,
+        & .calories,
         & .heartrate {
           display: flex;
           justify-content: space-between;
@@ -66,5 +66,11 @@
         }
       }
     }
+  }
+
+  &__metrics {
+    width: auto;
+    display: flex;
+    flex-direction: column;
   }
 }

@@ -1,5 +1,6 @@
 import React from 'react'
 import { motion } from 'framer-motion'
+import Moment from 'react-moment'
 
 const ActivityCard = ({ activity, openCard, setOpen }) => {
   const {
@@ -8,8 +9,9 @@ const ActivityCard = ({ activity, openCard, setOpen }) => {
     avg_hr,
     created_at,
     distance,
+    calories,
     name
-  } = activity
+  } = activity.activity
 
   return (
     <div className='detail-card m-2'>
@@ -26,12 +28,11 @@ const ActivityCard = ({ activity, openCard, setOpen }) => {
           className='detail-card__main'
         >
           <div className='detail-card__main--left'>
-            <img
-              src='http://203.153.40.19/bct/img/user.png'
-              alt='profile image'
-            />
+            <img src='http://203.153.40.19/bct/img/user.png' alt='profile' />
             <div className='detail-card__main-left-text'>
-              <small>{created_at}</small>
+              <small>
+                <Moment format='MM-DD-YYYY hh:mm a'>{created_at}</Moment>
+              </small>
               <h3>{name}</h3>
             </div>
           </div>
@@ -47,14 +48,16 @@ const ActivityCard = ({ activity, openCard, setOpen }) => {
               </div>
               <div className='stats--item'>
                 <small>pace </small>
-                <div className='stat'>SPEED PLACEHOLDER mi/s</div>
+                <div className='stat'>
+                  {Math.round((distance / activity_time) * 100) / 100} m/s
+                </div>
               </div>
             </div>
             <div className='heartrate my-1'>
-              average hr: <span>{avg_hr}</span>
+              average hr: <span>{avg_hr} bpm</span>
             </div>
-            <div className='time my-1'>
-              time: <span>{activity_time}</span>
+            <div className='calories my-1'>
+              calories: <span>{calories}</span>
             </div>
           </div>
         </motion.div>

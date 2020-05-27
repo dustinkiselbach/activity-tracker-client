@@ -37,7 +37,7 @@ const DashboardCard = ({ activity, user, imperialToggle }) => {
       <span className='material-icons share'>share</span>
       <div className='card__main'>
         <div className='card__main--left'>
-          <img src='http://203.153.40.19/bct/img/user.png' />
+          <img src='http://203.153.40.19/bct/img/user.png' alt='profile' />
           <span className='material-icons'>
             {activity_type === 'Run' ? 'directions_run' : 'directions_bike'}
           </span>
@@ -48,7 +48,11 @@ const DashboardCard = ({ activity, user, imperialToggle }) => {
             <Moment format='MM-DD-YYYY hh:mm a'>{created_at}</Moment>
           </small>
           <h2>
-            <Link to={`/activity/${id}`}>{name ? name : activity_type}</Link>
+            <Link
+              to={`/activity/${id},${!imperialToggle ? 'metric' : 'imperial'}`}
+            >
+              {name ? name : activity_type}
+            </Link>
           </h2>
           <div className='stats'>
             <div className='stats--item'>

@@ -21,10 +21,11 @@
   &__nav {
     display: flex;
     margin-left: 2rem;
-    position: relative;
 
     &--item {
       padding: 0 1rem;
+      position: relative;
+
       &:not(:last-child) {
         margin-right: 2rem;
       }
@@ -34,11 +35,50 @@
       }
 
       & .sublist {
+        z-index: 1;
         display: none;
         position: absolute;
-        transform: translateX(-1rem);
-        padding: 1rem;
+        transform: translateX(-1.5rem);
+        top: 2.5rem;
         background-color: $color-light;
+        border-radius: 5px;
+        transition: all 0.1s ease-in;
+
+        & li {
+          background-color: $color-light;
+          box-shadow: 0 0.5rem 1rem rgba($color-dark, 0.1);
+          padding: 1rem;
+        }
+      }
+
+      &::after {
+        content: '';
+        height: 5px;
+        width: 5px;
+        background-color: $color-primary;
+        position: absolute;
+        bottom: -15px;
+        left: 50%;
+        border-radius: 100%;
+        opacity: 0;
+        transform: translate(-94px, -50%);
+        z-index: 2;
+      }
+
+      &:hover {
+        &::after {
+          content: '';
+          height: 5px;
+          width: 5px;
+          background-color: $color-primary;
+          position: absolute;
+          bottom: -15px;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          opacity: 1;
+          border-radius: 100%;
+          transition: all 0.2s ease-in;
+        }
       }
     }
   }
