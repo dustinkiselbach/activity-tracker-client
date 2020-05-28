@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import UserContext from '../../context/user/userContext'
 import AlertContext from '../../context/alert/alertContext'
 
@@ -15,7 +15,9 @@ const Navbar = () => {
   const authLinks = (
     <>
       <li className='navbar__dashboard--item'>
-        <Link to='/dashboard'>Dashboard</Link>
+        <NavLink to='/dashboard' activeClassName='selected'>
+          Dashboard
+        </NavLink>
       </li>
       <li className='navbar__dashboard--item'>
         <Link to='/login' onClick={logoutUser}>
@@ -57,7 +59,7 @@ const Navbar = () => {
           {/* EXAMPLE OF POSSIBLE DROPDOWN MENU */}
           <li className='navbar__nav--item'>
             <a href='/#'>fart</a>
-            <ul className='sublist'>
+            {/* <ul className='sublist'>
               <li>
                 <a href='#/'>testlink</a>
               </li>
@@ -67,12 +69,12 @@ const Navbar = () => {
               <li>
                 <a href='#/'>farting69</a>
               </li>
-            </ul>
+            </ul> */}
           </li>
           {/* EXAMPLE END */}
           <li className='navbar__nav--item'>
             <a href='/#'>fart</a>
-            <ul className='sublist'>
+            {/* <ul className='sublist'>
               <li>
                 <a href='#/'>testlink</a>
               </li>
@@ -82,7 +84,7 @@ const Navbar = () => {
               <li>
                 <a href='#/'>wookie</a>
               </li>
-            </ul>
+            </ul> */}
           </li>
         </ul>
         <ul className='navbar__dashboard'>

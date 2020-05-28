@@ -6,11 +6,13 @@
   border-bottom: rgba($color-dark, 0.1) 2px solid;
   box-shadow: 0 0.2rem 0.4rem rgba(black, 0.1);
   background-color: $color-light;
+
   &__brand {
     font-size: 1.6rem;
     font-weight: 400;
     display: flex;
     align-items: center;
+
     span {
       margin-left: 0.5rem;
       font-size: 2rem;
@@ -23,33 +25,40 @@
     margin-left: 2rem;
 
     &--item {
-      padding: 0 1rem;
+      // using px to make it easier for animation
+      padding: 0 16px;
       position: relative;
 
       &:not(:last-child) {
         margin-right: 2rem;
       }
 
-      &:hover .sublist {
-        display: block;
-      }
+      // CRAP FROM ATTEMPT NUMBER 1
 
-      & .sublist {
-        z-index: 1;
-        display: none;
-        position: absolute;
-        transform: translateX(-1.5rem);
-        top: 2.5rem;
-        background-color: $color-light;
-        border-radius: 5px;
-        transition: all 0.1s ease-in;
+      // &:hover .sublist {
+      //   transform: translate(-1.5rem, -1.5rem);
+      // }
 
-        & li {
-          background-color: $color-light;
-          box-shadow: 0 0.5rem 1rem rgba($color-dark, 0.1);
-          padding: 1rem;
-        }
-      }
+      // & .sublist {
+      //   z-index: 1;
+      //   display: block;
+      //   position: absolute;
+      //   transform: translate(-1.5rem, -500px);
+      //   top: 2.5rem;
+      //   background-color: $color-light;
+      //   border-radius: 5px;
+      //   // transition: all 0.1s ease-in;
+
+      //   & li {
+      //     background-color: $color-light;
+      //     box-shadow: 0 0.5rem 1rem rgba($color-dark, 0.1);
+      //     padding: 1rem;
+      //   }
+
+      //   &:hover {
+      //     transform: translate(-1.5rem, 0);
+      //   }
+      // }
 
       &::after {
         content: '';
