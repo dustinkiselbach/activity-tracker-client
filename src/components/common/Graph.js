@@ -1,55 +1,114 @@
 import React from 'react'
+import { VictoryAxis, VictoryLine } from 'victory'
+import { graphStyle } from '../style/graphStyle'
 
-import {
-  LineChart,
-  ResponsiveContainer,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend
-} from 'recharts'
+const Graph = ({ splits, shown }) => {
+  // organizing data
+  const tickValues = splits.map(split => split.split)
 
-const Graph = ({ splits }) => {
-  const data = splits.map(split => ({
-    key: split.split,
-    pace: split.average_speed,
-    hr: Math.round(split.average_heartrate),
-    elev: split.elevation_difference
+  const avgHr = splits.map(split => ({
+    x: split.split,
+    y: split.average_heartrate
   }))
+
+  const avgSpeed = splits.map(split => ({
+    x: split.split,
+    y: split.average_speed
+  }))
+
+  const avgElev = splits.map(split => ({
+    x: split.split,
+    y: split.elevation_difference
+  }))
+
+  const data = {
+    tickValues,
+    avgHr: {
+      dataSet: avgHr,
+      domainY: [50, 200],
+      tickFormat: 'bpm',
+      axisStyle: 'axisOne',
+      lineStyle: 'lineOne'
+    },
+    avgSpeed: {
+      dataSet: avgSpeed,
+      domainY: [0, 5],
+      tickFormat: 'm/s',
+      axisStyle: 'axisTwo',
+      lineStyle: 'lineTwo'
+    },
+    avgElev: {
+      dataSet: avgElev,
+      domainY: [-50, 50],
+      tickFormat: 'meters',
+      axisStyle: 'axisThree',
+      lineStyle: 'lineThree'
+    }
+  }
+
+  const styles = graphStyle()
 
   return (
     <div className='graph'>
-      <ResponsiveContainer width='99%' height='100%'>
-        <LineChart
-          width={500}
-          height={300}
-          data={data}
-          label='fart'
-          margin={{
-            top: 5,
-            right: 30,
-            left: 20,
-            bottom: 5
-          }}
-        >
-          <CartesianGrid strokeDasharray='3 3' />
-          <XAxis dataKey='key' />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <Line
-            type='monotone'
-            dataKey='pace'
-            stroke='#8884d8'
-            activeDot={{ r: 8 }}
+      <svg viewBox='0 0 450 350' style={styles.parent}>
+        <g transform={'translate(0, 40)'}>
+          <VictoryAxis
+            standalone={false}
+            tickValues={tickValues}
+            tickFormat={x => `${x} mi`}
+            style={styles.axisSplits}
           />
-          <Line type='monotone' dataKey='hr' stroke='#82ca9d' label='bpm' />
-          <Line type='monotone' dataKey='elev' stroke='#82ca9d' />
-        </LineChart>
-      </ResponsiveContainer>
+
+          {shown.map((item, index) => (
+            <GraphPartial
+              domainY={data[item.id].domainY}
+              tickFormat={data[item.id].tickFormat}
+              axisStyle={styles[data[item.id].axisStyle]}
+              lineStyle={styles[data[item.id].lineStyle]}
+              tickValues={tickValues}
+              dataSet={data[item.id].dataSet}
+              orientation={index === 0 ? 'left' : 'right'}
+              key={data[item.id].tickFormat}
+            />
+          ))}
+        </g>
+      </svg>
     </div>
+  )
+}
+
+const GraphPartial = ({
+  domainY,
+  tickFormat,
+  tickValues,
+  axisStyle,
+  lineStyle,
+  orientation,
+  dataSet
+}) => {
+  return (
+    <>
+      <VictoryAxis
+        domain={domainY}
+        dependentAxis
+        offsetX={50}
+        orientation={orientation}
+        standalone={false}
+        tickFormat={x => `${x} ${tickFormat}`}
+        style={axisStyle}
+      />
+      <VictoryLine
+        data={dataSet}
+        domain={{
+          x: [tickValues[0], tickValues.slice(-1)[0]],
+          y: domainY
+        }}
+        interpolation='monotoneX'
+        standalone={false}
+        style={lineStyle}
+        animate={{}}
+      />
+    </>
   )
 }
 

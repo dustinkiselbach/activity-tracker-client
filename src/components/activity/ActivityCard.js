@@ -1,6 +1,7 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import Moment from 'react-moment'
+import moment from 'moment'
 
 const ActivityCard = ({ activity, openCard, setOpen }) => {
   const {
@@ -12,6 +13,10 @@ const ActivityCard = ({ activity, openCard, setOpen }) => {
     calories,
     name
   } = activity.activity
+
+  // to format seconds into hours minutes and seconds
+  const duration = moment.duration(activity_time, 'seconds')
+  const activityLength = duration.format('hh:mm:ss')
 
   return (
     <div className='detail-card m-2'>
@@ -44,7 +49,7 @@ const ActivityCard = ({ activity, openCard, setOpen }) => {
               </div>
               <div className='stats--item'>
                 <small>moving time</small>
-                <div className='stat'>{activity_time} seconds</div>
+                <div className='stat'>{activityLength}</div>
               </div>
               <div className='stats--item'>
                 <small>pace </small>

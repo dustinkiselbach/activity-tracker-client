@@ -331,6 +331,11 @@
   background-color: $color-light;
   overflow: hidden;
   box-shadow: 0 0.4rem 0.8rem rgba(black, 0.1);
+  border-radius: 5px;
+
+  & caption {
+    background-color: $color-light;
+  }
 
   & tbody tr {
     &:hover {
@@ -345,7 +350,9 @@
   & thead {
     font-weight: 700;
     background-color: rgba($color-dark, 0.2);
+
     border-bottom: 1px solid rgba($color-dark, 0.75);
+    border-top: 1px solid rgba($color-dark, 0.75);
   }
 
   & thead th:nth-child(1) {

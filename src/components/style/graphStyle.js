@@ -3,7 +3,6 @@ export const graphStyle = () => {
   const colorSecondary = '#5cb85c'
   const colorTertiary = '#f0ad4e'
   const colorDark = '#414141'
-  const colorText = '#333'
   const colorLight = '#fff'
 
   return {
