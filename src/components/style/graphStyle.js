@@ -32,10 +32,10 @@ export const graphStyle = () => {
     },
     // DATA SET ONE
     axisOne: {
-      grid: {
-        stroke: colorDark,
-        strokeWidth: 0
-      },
+      // grid: {
+      //   stroke: colorDark,
+      //   strokeWidth: 0.5
+      // },
       axis: { stroke: colorDark, strokeWidth: 1 },
       ticks: { strokeWidth: 1 },
       tickLabels: {
@@ -73,3 +73,15 @@ export const graphStyle = () => {
     }
   }
 }
+
+// export const smallGraphStyle = () => {
+//   const colorPrimary = '#d9534f'
+//   const colorSecondary = '#5cb85c'
+//   const colorTertiary = '#f0ad4e'
+//   const colorDark = '#414141'
+//   const colorLight = '#fff'
+
+//   return {
+//     parent: {}
+//   }
+// }

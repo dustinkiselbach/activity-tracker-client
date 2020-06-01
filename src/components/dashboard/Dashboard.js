@@ -58,7 +58,7 @@ const Dashboard = () => {
               />
             </div>
 
-            <DashboardSidebar user={user} />
+            <DashboardSidebar activities={activities} user={user} />
           </div>
           <DashboardActivities
             activities={activities}

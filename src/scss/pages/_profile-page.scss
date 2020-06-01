@@ -1,0 +1,20 @@
+.profile {
+  &__top {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    padding: 1rem;
+    &--user {
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      & img {
+        width: 25%;
+        border-radius: 100%;
+      }
+    }
+    &--activities-summary {
+    }
+  }
+  &__metrics {
+  }
+}

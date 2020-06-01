@@ -41,6 +41,7 @@
   transition: all 0.2s;
   &:hover {
     background-color: darken($color-primary, 15%);
+    color: $color-light;
   }
   &:active {
     transform: scale(1.02);
@@ -377,7 +378,8 @@
 
 // dark line
 .dark-line {
-  border-bottom: rgba($color-dark, 0.5) 1px solid;
+  border-bottom: rgba($color-dark, 0.2) 1px solid;
+  width: 100%;
 }
 
 // Margin & Padding

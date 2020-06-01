@@ -25,21 +25,30 @@ const Graph = ({ splits, shown }) => {
     tickValues,
     avgHr: {
       dataSet: avgHr,
-      domainY: [50, 200],
+      domainY: [
+        Math.floor(Math.min(...avgHr.map(item => item.y))),
+        Math.ceil(Math.max(...avgHr.map(item => item.y)))
+      ],
       tickFormat: 'bpm',
       axisStyle: 'axisOne',
       lineStyle: 'lineOne'
     },
     avgSpeed: {
       dataSet: avgSpeed,
-      domainY: [0, 5],
+      domainY: [
+        Math.floor(Math.min(...avgSpeed.map(item => item.y))),
+        Math.ceil(Math.max(...avgSpeed.map(item => item.y)))
+      ],
       tickFormat: 'm/s',
       axisStyle: 'axisTwo',
       lineStyle: 'lineTwo'
     },
     avgElev: {
       dataSet: avgElev,
-      domainY: [-50, 50],
+      domainY: [
+        Math.floor(Math.min(...avgElev.map(item => item.y))),
+        Math.ceil(Math.max(...avgElev.map(item => item.y)))
+      ],
       tickFormat: 'meters',
       axisStyle: 'axisThree',
       lineStyle: 'lineThree'
@@ -86,6 +95,13 @@ const GraphPartial = ({
   orientation,
   dataSet
 }) => {
+  if (orientation === 'left') {
+    axisStyle.grid = {
+      stroke: '#414141',
+      strokeWidth: 0.5
+    }
+  }
+
   return (
     <>
       <VictoryAxis

@@ -30,7 +30,6 @@
       box-shadow: 0 0.4rem 0.8rem rgba(black, 0.1);
       position: fixed;
       width: calc(33.333% - 3.75rem);
-
       img {
         width: 6rem;
         height: 6rem;
@@ -40,6 +39,22 @@
 
       h4 {
         font-weight: 400;
+      }
+
+      .latest-activity {
+        margin: 1rem 0;
+        font-size: 0.9rem;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        border-top: rgba($color-dark, 0.2) 1px solid;
+        border-bottom: rgba($color-dark, 0.2) 1px solid;
+        padding: 0.5rem;
+        width: 100%;
+
+        h4 {
+          margin-right: 5px;
+        }
       }
     }
   }

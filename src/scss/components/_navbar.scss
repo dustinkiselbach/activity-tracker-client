@@ -2,10 +2,17 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  padding: 0.5rem 1rem;
+  padding: 0 1rem;
   border-bottom: rgba($color-dark, 0.1) 2px solid;
   box-shadow: 0 0.2rem 0.4rem rgba(black, 0.1);
   background-color: $color-light;
+  height: 50px;
+
+  & ul {
+    a {
+      color: $color-dark;
+    }
+  }
 
   &__brand {
     font-size: 1.6rem;
@@ -23,82 +30,96 @@
   &__nav {
     display: flex;
     margin-left: 2rem;
+    height: 100%;
 
     &--item {
-      // using px to make it easier for animation
-      padding: 0 16px;
+      margin: 2px;
       position: relative;
-
-      &:not(:last-child) {
-        margin-right: 2rem;
-      }
-
-      // CRAP FROM ATTEMPT NUMBER 1
-
-      // &:hover .sublist {
-      //   transform: translate(-1.5rem, -1.5rem);
-      // }
-
-      // & .sublist {
-      //   z-index: 1;
-      //   display: block;
-      //   position: absolute;
-      //   transform: translate(-1.5rem, -500px);
-      //   top: 2.5rem;
-      //   background-color: $color-light;
-      //   border-radius: 5px;
-      //   // transition: all 0.1s ease-in;
-
-      //   & li {
-      //     background-color: $color-light;
-      //     box-shadow: 0 0.5rem 1rem rgba($color-dark, 0.1);
-      //     padding: 1rem;
-      //   }
-
-      //   &:hover {
-      //     transform: translate(-1.5rem, 0);
-      //   }
-      // }
-
-      &::after {
-        content: '';
-        height: 5px;
-        width: 5px;
-        background-color: $color-primary;
-        position: absolute;
-        bottom: -15px;
-        left: 50%;
-        border-radius: 100%;
-        opacity: 0;
-        transform: translate(-94px, -50%);
-        z-index: 2;
-      }
-
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      width: 100px;
       &:hover {
-        &::after {
-          content: '';
-          height: 5px;
-          width: 5px;
-          background-color: $color-primary;
-          position: absolute;
-          bottom: -15px;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          opacity: 1;
-          border-radius: 100%;
-          transition: all 0.2s ease-in;
-        }
+        background-color: rgba($color-dark, 0.1);
+        border-radius: 5px;
       }
+      transition: all 0.2s ease-in-out;
+    }
+
+    & .active {
+      color: $color-primary;
     }
   }
 
-  &__dashboard {
+  &__user {
     margin-left: auto;
     display: flex;
+    height: 100%;
+
+    position: relative;
     &--item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      width: auto;
       &:not(:last-child) {
         margin-right: 2rem;
       }
+
+      a {
+        display: flex;
+        align-items: center;
+      }
+    }
+
+    & .sublist {
+      position: absolute;
+      background-color: bisque;
+      border-radius: 5px;
+      z-index: 5;
+      top: 45px;
+      width: 200px;
+      height: 200px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-evenly;
+      padding: 1rem;
+      box-shadow: 0 0.4rem 0.8rem rgba(black, 0.2);
+      background-color: $color-light;
+
+      & li {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 2px;
+        border-radius: 5px;
+        transition: all 0.2s ease-in-out;
+        &:hover {
+          background-color: rgba($color-dark, 0.1);
+          border-radius: 5px;
+        }
+      }
+    }
+
+    span {
+      margin: 5px;
+      cursor: pointer;
+      border-radius: 100%;
+      transition: all 0.2s ease-in-out;
+
+      &:active {
+        transform: scale(0.9);
+      }
+    }
+
+    & .toggled {
+      background-color: $color-primary;
+      color: $color-light;
     }
   }
 }

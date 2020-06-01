@@ -1,5 +1,6 @@
 .landing {
   height: calc(100vh - 58px);
+  position: relative;
 
   &__top {
     background-image: linear-gradient(
@@ -11,16 +12,20 @@
     background-position: bottom;
     height: 50vh;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
+    align-items: flex-start;
+    justify-content: center;
+
     h1 {
+      margin-top: 2rem;
       color: $color-light;
       font-size: 4rem;
-      margin-bottom: 10rem;
     }
 
     &--info-card {
+      position: absolute;
+      top: 53%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       background-color: $color-light;
       display: flex;
       flex-direction: column;
@@ -29,10 +34,8 @@
       text-align: center;
       box-shadow: 0 0.4rem 0.8rem rgba(black, 0.1);
       padding: 1.5rem;
-      margin-bottom: -9rem;
       border-radius: 5px;
-      width: 33.33%;
-      height: 33.33%;
+      // width: 33.33%;
       p {
         font-weight: 400;
       }

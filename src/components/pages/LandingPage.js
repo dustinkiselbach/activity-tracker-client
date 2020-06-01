@@ -5,7 +5,7 @@ import UserContext from '../../context/user/userContext'
 const LandingPage = ({ location, history }) => {
   const userContext = useContext(UserContext)
 
-  const { confirmAccount } = userContext
+  const { confirmAccount, isAuthenticated } = userContext
 
   const qs = new URLSearchParams(location.search)
 
@@ -17,8 +17,18 @@ const LandingPage = ({ location, history }) => {
     } else if (qs.get('reset_password_token')) {
       history.push(`/reset-password/${qs.get('reset_password_token')}`)
     }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      history.push('/dashboard')
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isAuthenticated])
+
   return (
     <section className='landing'>
       <div className='landing__top'>

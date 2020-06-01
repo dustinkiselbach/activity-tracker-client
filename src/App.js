@@ -9,6 +9,7 @@ import FormPage from './components/pages/FormPage'
 import IntergrationAuth from './components/pages/IntergrationAuth'
 import Dashboard from './components/dashboard/Dashboard'
 import Activity from './components/activity/Activity'
+import Profile from './components/profile/Profile'
 
 import UserState from './context/user/UserState'
 import AlertState from './context/alert/AlertState'
@@ -54,6 +55,7 @@ function App () {
               />
 
               <PrivateRoute exact path='/dashboard' component={Dashboard} />
+              <PrivateRoute exact path='/profile' component={Profile} />
               <PrivateRoute
                 exact
                 path='/activity/:id,:unit'
