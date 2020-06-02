@@ -5,6 +5,8 @@ export const graphStyle = () => {
   const colorDark = '#414141'
   const colorLight = '#fff'
 
+  const colorGreen = '#7c8e51'
+
   return {
     parent: {
       background: colorLight,
@@ -70,18 +72,46 @@ export const graphStyle = () => {
     },
     lineThree: {
       data: { stroke: colorTertiary, strokeWidth: 1 }
+    },
+    // STYLES SPECIFIC TO SMALL BAR GRAPH
+    // Main Y axis
+    sgMainAxis: {
+      axis: { stroke: colorDark, strokeWidth: 0.5 },
+      ticks: {
+        stroke: colorDark,
+        strokeWidth: 1,
+        size: 2
+      },
+      tickLabels: {
+        fill: colorDark,
+        fontFamily: 'inherit',
+        fontSize: 16
+      }
+    },
+    // X axis
+    sgXAxis: {
+      grid: {
+        stroke: colorDark,
+        strokeWidth: 0.2
+      },
+      axis: { stroke: colorDark, strokeWidth: 0.5 },
+      ticks: { strokeWidth: 1 },
+      tickLabels: {
+        fill: colorDark,
+        fontFamily: 'inherit',
+        fontSize: 10
+      }
+    },
+    // Bar
+    sgBar: {
+      data: { fill: colorGreen, width: 20 }
+    },
+    // Label
+    title: {
+      fill: colorGreen,
+      fontFamily: 'inherit',
+      fontSize: 20,
+      fontWeight: 400
     }
   }
 }
-
-// export const smallGraphStyle = () => {
-//   const colorPrimary = '#d9534f'
-//   const colorSecondary = '#5cb85c'
-//   const colorTertiary = '#f0ad4e'
-//   const colorDark = '#414141'
-//   const colorLight = '#fff'
-
-//   return {
-//     parent: {}
-//   }
-// }
