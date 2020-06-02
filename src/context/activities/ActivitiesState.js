@@ -2,11 +2,17 @@ import React, { useReducer } from 'react'
 import axios from 'axios'
 import ActivitiesContext from './activitiesContext'
 import activitiesReducer from './activitiesReducer'
-import { GET_ACTIVITIES, GET_ACTIVITY, SET_LOADING } from '../types'
+import {
+  GET_ACTIVITIES,
+  GET_ACTIVITIES_PAGINATION,
+  GET_ACTIVITY,
+  SET_LOADING
+} from '../types'
 
 const ActivitiesState = props => {
   const initialState = {
     activities: [],
+    pagination: {},
     activity: null,
     loading: false
   }
@@ -14,14 +20,21 @@ const ActivitiesState = props => {
   const [state, dispatch] = useReducer(activitiesReducer, initialState)
 
   // Get all acitivities associated with logged in user
-  const getActivities = async () => {
-    setLoading()
+  const getActivities = async page => {
+    // if lazy loading don't want loading icon every time
+    if (page === 1) {
+      setLoading()
+    }
 
     try {
       const res = await axios.get(
-        'https://agile-retreat-42559.herokuapp.com//api/v1/activities'
+        `https://agile-retreat-42559.herokuapp.com//api/v1/activities?page=${page}`
       )
       dispatch({ type: GET_ACTIVITIES, payload: res.data.activities })
+      dispatch({
+        type: GET_ACTIVITIES_PAGINATION,
+        payload: res.data.pagination
+      })
       console.log(res)
     } catch (err) {
       console.log(err.response.data)
@@ -74,6 +87,7 @@ const ActivitiesState = props => {
     <ActivitiesContext.Provider
       value={{
         activities: state.activities,
+        pagination: state.pagination,
         activity: state.activity,
         loading: state.loading,
         getActivities,

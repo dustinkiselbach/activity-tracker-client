@@ -7,6 +7,7 @@ export const SET_AUTHENTICATING = 'SET_AUTHENTICATING'
 // Acitivities Types
 export const GET_ACTIVITIES = 'GET_ACTIVITIES'
 export const GET_ACTIVITY = 'GET_ACTIVITY'
+export const GET_ACTIVITIES_PAGINATION = 'GET_ACTIVITIES_PAGINATION'
 export const SET_LOADING = 'SET_LOADING'
 // Alert Types
 export const SET_ALERT = 'SET_ALERT'

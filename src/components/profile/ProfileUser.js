@@ -1,7 +1,6 @@
 import React from 'react'
 
 const ProfileUser = ({ user }) => {
-  console.log(user)
   return (
     <>
       {user && (

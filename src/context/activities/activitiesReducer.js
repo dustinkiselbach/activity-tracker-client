@@ -1,12 +1,22 @@
-import { GET_ACTIVITIES, GET_ACTIVITY, SET_LOADING } from '../types'
+import {
+  GET_ACTIVITIES,
+  GET_ACTIVITY,
+  GET_ACTIVITIES_PAGINATION,
+  SET_LOADING
+} from '../types'
 
 export default (state, action) => {
   switch (action.type) {
     case GET_ACTIVITIES:
       return {
         ...state,
-        activities: action.payload,
+        activities: [...state.activities, action.payload],
         loading: false
+      }
+    case GET_ACTIVITIES_PAGINATION:
+      return {
+        ...state,
+        pagination: action.payload
       }
     case GET_ACTIVITY:
       return {

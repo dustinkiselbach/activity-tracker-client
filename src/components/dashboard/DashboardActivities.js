@@ -3,7 +3,7 @@ import DashboardCard from './DashboardCard'
 
 const DashboardActivities = ({ activities, user, imperialToggle }) => {
   return (
-    <div className='activities'>
+    <>
       {activities.map(activity => (
         <DashboardCard
           key={activity.id}
@@ -12,7 +12,7 @@ const DashboardActivities = ({ activities, user, imperialToggle }) => {
           imperialToggle={imperialToggle}
         />
       ))}
-    </div>
+    </>
   )
 }
 

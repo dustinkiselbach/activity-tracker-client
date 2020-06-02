@@ -6,15 +6,24 @@ import DashboardActivities from './DashboardActivities'
 import DashboardSidebar from './DashboardSidebar'
 import Toggler from '../common/Toggler'
 
+import { useInView } from 'react-intersection-observer'
+
 const stravaURL =
   'https://www.strava.com/oauth/authorize?client_id=47703&redirect_uri=http://localhost:3000/auth/strava/code&response_type=code&scope=activity:read_all,activity:write'
 
 const Dashboard = () => {
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+    rootMargin: '400px 0px'
+  })
+
   const [imperialToggle, setToggle] = useState(false)
+  const [pages, setPages] = useState([1])
 
   const activitiesContext = useContext(ActivitiesContext)
   const {
     activities,
+    pagination,
     syncActivities,
     getActivities,
     loading
@@ -25,9 +34,9 @@ const Dashboard = () => {
 
   useEffect(() => {
     // have to set headers before stuff is fetched
-    if (!userContext.loading) {
+    if (!userContext.loading && activities.length === 0) {
       syncActivities()
-      getActivities()
+      getActivities(1)
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -39,6 +48,24 @@ const Dashboard = () => {
       setToggle(true)
     }
   }, [])
+
+  // if ref is in view add another item to array
+
+  useEffect(() => {
+    if (inView && pages.slice(-1)[0] !== pagination.total_pages) {
+      setPages([...pages, pages.slice(-1)[0] + 1])
+    }
+  }, [inView])
+
+  //  get the page based on last item of array
+  //  boolean checking to make sure the pages
+  //  stay in sync with the api calls
+
+  useEffect(() => {
+    if (inView && pages.length > activities.length) {
+      getActivities(pages.slice(-1)[0])
+    }
+  }, [pages])
 
   return (
     <section className='dashboard'>
@@ -58,13 +85,25 @@ const Dashboard = () => {
               />
             </div>
 
-            <DashboardSidebar activities={activities} user={user} />
+            <DashboardSidebar activities={activities[0]} user={user} />
           </div>
-          <DashboardActivities
-            activities={activities}
-            user={user}
-            imperialToggle={imperialToggle}
-          />
+          <div className='activities'>
+            {pages.map((page, index) => (
+              <React.Fragment key={index}>
+                {activities[index] && (
+                  <>
+                    <DashboardActivities
+                      activities={activities[index]}
+                      user={user}
+                      imperialToggle={imperialToggle}
+                    />
+                    {/* TEST */}
+                    <div ref={ref} />
+                  </>
+                )}
+              </React.Fragment>
+            ))}
+          </div>
         </>
       ) : (
         // there are no activities
