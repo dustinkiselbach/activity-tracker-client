@@ -40,10 +40,17 @@
           }
 
           tbody {
-            padding: 1rem;
             td {
               cursor: pointer;
               position: relative;
+              &.active {
+                time {
+                  opacity: 1;
+                }
+                span {
+                  opacity: 0;
+                }
+              }
 
               time {
                 // display: none;

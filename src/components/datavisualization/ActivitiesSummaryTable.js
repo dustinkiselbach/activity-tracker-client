@@ -22,11 +22,21 @@ const ActivitiesSummaryTable = ({ monthActivities: { weeks } }) => {
         {weeks.map((week, bigI) => (
           <tr key={bigI}>
             {weekDays.map((day, index) => (
-              <td key={index}>
+              <td
+                key={index}
+                className={classnames(null, {
+                  active: now.isSame(
+                    now
+                      .clone()
+                      .subtract(bigI, 'w')
+                      .weekday(index)
+                  )
+                })}
+              >
                 {now
                   .clone()
                   .subtract(bigI, 'w')
-                  .weekday(index) < now ? (
+                  .weekday(index) <= now ? (
                   <>
                     <Moment format='DD'>
                       {now
@@ -53,27 +63,3 @@ const ActivitiesSummaryTable = ({ monthActivities: { weeks } }) => {
 }
 
 export default ActivitiesSummaryTable
-
-{
-  /* <table className='splits-table'>
-      <caption>Splits</caption>
-      <thead>
-        <tr>
-          <th>mile</th>
-          <th>pace</th>
-          <th>hr</th>
-          <th>elev</th>
-        </tr>
-      </thead>
-      <tbody>
-        {splits.map(split => (
-          <tr key={split.split}>
-            <th>{split.split}</th>
-            <th>{split.average_speed} m/s</th>
-            <th>{Math.round(split.average_heartrate)} bpm</th>
-            <th>{split.elevation_difference} m</th>
-          </tr>
-        ))}
-      </tbody>
-    </table> */
-}
