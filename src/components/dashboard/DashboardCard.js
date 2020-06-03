@@ -45,7 +45,9 @@ const DashboardCard = ({ activity, user, imperialToggle }) => {
         <div className='card__main--right'>
           <h3>{user.name ? user.name : 'why no name??'}</h3>
           <small>
-            <Moment format='MM-DD-YYYY hh:mm a'>{start_date_local}</Moment>
+            <Moment format='MM-DD-YYYY hh:mm a' utc locale>
+              {start_date_local}
+            </Moment>
           </small>
           <h2>
             <Link
