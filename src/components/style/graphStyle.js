@@ -104,7 +104,16 @@ export const graphStyle = () => {
     },
     // Bar
     sgBar: {
-      data: { fill: colorGreen, width: 20 }
+      data: {
+        fill: colorGreen,
+        stroke: colorDark,
+        fillOpacity: 0.75,
+        strokeWidth: 1
+      },
+      labels: {
+        fontSize: 12,
+        fontFamily: "'Jost', sans-serif"
+      }
     },
     // Label
     title: {

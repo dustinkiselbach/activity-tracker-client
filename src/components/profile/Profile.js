@@ -4,16 +4,23 @@ import ProfileActivitiesSummary from './ProfileActivitesSummary'
 
 import ProfileContext from '../../context/profile/profileContext'
 import ActivitiesContext from '../../context/activities/activitiesContext'
+import ProfileOverview from './ProfileOverview'
 
-const Profile = () => {
+const Profile = ({ match }) => {
   const profileContext = useContext(ProfileContext)
-  const { profile, getProfile } = profileContext
+  const { profile, getProfile, getUserProfile } = profileContext
 
   const activitiesContext = useContext(ActivitiesContext)
   const { activities } = activitiesContext
 
   useEffect(() => {
-    getProfile()
+    // if params get profile by id
+    if (Object.keys(match.params).length > 0) {
+      getProfile(match.params.id)
+    } else {
+      // get profile by auth headers
+      getUserProfile()
+    }
   }, [])
 
   return (
@@ -26,7 +33,9 @@ const Profile = () => {
           <ProfileActivitiesSummary activities={activities} />
         </div>
       </div>
-      <div className='profile__metrics'>METRICS PLACEHOLDER</div>
+      <div className='profile__metrics'>
+        <ProfileOverview profile={profile} />
+      </div>
     </section>
   )
 }

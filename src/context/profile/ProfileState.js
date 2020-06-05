@@ -12,10 +12,22 @@ const ProfileState = props => {
   const [state, dispatch] = useReducer(profileReducer, initialState)
 
   // get profile
-  const getProfile = async () => {
+  const getUserProfile = async () => {
     try {
       const res = await axios.get(
         'https://agile-retreat-42559.herokuapp.com//api/v1/users'
+      )
+      dispatch({ type: GET_PROFILE, payload: res.data })
+      console.log(res)
+    } catch (err) {
+      console.log(err.response.data)
+    }
+  }
+  // get profile
+  const getProfile = async id => {
+    try {
+      const res = await axios.get(
+        `https://agile-retreat-42559.herokuapp.com//api/v1/users/${id}`
       )
       dispatch({ type: GET_PROFILE, payload: res.data })
       console.log(res)
@@ -28,6 +40,7 @@ const ProfileState = props => {
     <ProfileContext.Provider
       value={{
         profile: state.profile,
+        getUserProfile,
         getProfile
       }}
     >

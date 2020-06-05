@@ -32,7 +32,7 @@ const LandingPage = ({ location, history }) => {
   return (
     <section className='landing'>
       <div className='landing__top'>
-        <h1 className='title'>Acivites Tracker</h1>
+        <h1 className='title'>Acivities Tracker</h1>
         <div className='landing__top--info-card'>
           <p className='lead'>Track your activies and live your best</p>
 

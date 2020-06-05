@@ -89,5 +89,10 @@
     }
   }
   &__metrics {
+    padding: 1rem;
+
+    & .title-secondary {
+      padding: 0.66rem;
+    }
   }
 }

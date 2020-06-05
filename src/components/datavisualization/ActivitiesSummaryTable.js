@@ -8,8 +8,6 @@ const weekDays = ['sun', 'mon', 'tues', 'wed', 'thurs', 'fri', 'sat']
 const ActivitiesSummaryTable = ({ monthActivities: { weeks } }) => {
   const now = moment()
 
-  console.log(weeks)
-
   return (
     <table className='summary-table'>
       <thead>

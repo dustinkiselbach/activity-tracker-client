@@ -72,7 +72,9 @@ const DashboardCard = ({ activity, imperialToggle }) => {
           </span>
         </div>
         <div className='card__main--right'>
-          <h3>{user.name ? user.name : 'why no name??'}</h3>
+          <h3>
+            <Link to={`/profile/${user_id}`}>{user.name}</Link>
+          </h3>
           <small>
             <Moment format='MM-DD-YYYY hh:mm a' utc locale>
               {start_date_local}

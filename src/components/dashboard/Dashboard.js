@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import ActivitiesContext from '../../context/activities/activitiesContext'
 import UserContext from '../../context/user/userContext'
+import ProfileContext from '../../context/profile/profileContext'
 
 import DashboardActivities from './DashboardActivities'
 import DashboardSidebar from './DashboardSidebar'
@@ -32,13 +33,14 @@ const Dashboard = () => {
   const userContext = useContext(UserContext)
   const { user } = userContext
 
-  // const profileContext = useContext(ProfileContext)
-  // const { profile, getProfile } = profileContext
+  const profileContext = useContext(ProfileContext)
+  const { profile, getProfile } = profileContext
 
   useEffect(() => {
     // have to set headers before stuff is fetched
     if (!userContext.loading && activities.length === 0) {
       syncActivities()
+      getProfile(user.sub)
       getActivities(1)
     }
 
@@ -90,8 +92,13 @@ const Dashboard = () => {
                     toggle={imperialToggle}
                   />
                 </div>
-
-                <DashboardSidebar activities={activities[0]} user={user} />
+                {profile && (
+                  <DashboardSidebar
+                    activities={activities[0]}
+                    profile={profile}
+                    imperialToggle={imperialToggle}
+                  />
+                )}
               </div>
               <div className='activities'>
                 {pages.map((page, index) => (
@@ -100,7 +107,6 @@ const Dashboard = () => {
                       <>
                         <DashboardActivities
                           activities={activities[index]}
-                          user={user}
                           imperialToggle={imperialToggle}
                         />
                         {/* TEST */}
