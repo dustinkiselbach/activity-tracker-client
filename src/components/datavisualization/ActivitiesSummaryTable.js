@@ -9,8 +9,9 @@ const ActivitiesSummaryTable = ({ monthActivities: { weeks } }) => {
   const now = moment()
 
   console.log(weeks)
+
   return (
-    <table className='summary-visualization__table'>
+    <table className='summary-table'>
       <thead>
         <tr>
           {weekDays.map(day => (

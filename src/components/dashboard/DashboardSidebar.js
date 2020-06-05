@@ -4,7 +4,6 @@ import SidebarGraph from '../common/SidebarGraph'
 
 const DashboardSidebar = ({ user, activities, imperialToggle }) => {
   const latestActivity = activities[0]
-
   const last7Activities = activities.slice(0, 7)
 
   return (

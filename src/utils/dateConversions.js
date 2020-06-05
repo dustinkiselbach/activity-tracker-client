@@ -15,7 +15,7 @@ export const dateConversions = data => {
 
   for (let i = 0; i < data.length; i++) {
     if (
-      moment(data[i].start_date_local).format('YYYY-MM-DD') >
+      moment(data[i].start_date_local).format('YYYY-MM-DD') >=
       moment()
         .add(difference, 'd')
         .format('YYYY-MM-DD')
@@ -25,11 +25,11 @@ export const dateConversions = data => {
         weekDay: moment(data[i].start_date_local).day()
       })
     } else if (
-      moment(data[i].start_date_local).format('YYYY-MM-DD') >
+      moment(data[i].start_date_local).format('YYYY-MM-DD') >=
         moment()
-          .subtract(14 + difference, 'd')
+          .subtract(7 - difference, 'd')
           .format('YYYY-MM-DD') &&
-      moment(data[i].start_date_local).format('YYYY-MM-DD') <=
+      moment(data[i].start_date_local).format('YYYY-MM-DD') <
         moment()
           .add(difference, 'd')
           .format('YYYY-MM-DD')
@@ -39,13 +39,13 @@ export const dateConversions = data => {
         weekDay: moment(data[i].start_date_local).day()
       })
     } else if (
-      moment(data[i].start_date_local).format('YYYY-MM-DD') >
+      moment(data[i].start_date_local).format('YYYY-MM-DD') >=
         moment()
-          .subtract(21 + difference, 'd')
+          .subtract(14 - difference, 'd')
           .format('YYYY-MM-DD') &&
-      moment(data[i].start_date_local).format('YYYY-MM-DD') <=
+      moment(data[i].start_date_local).format('YYYY-MM-DD') <
         moment()
-          .subtract(14 + difference, 'd')
+          .subtract(7 - difference, 'd')
           .format('YYYY-MM-DD')
     ) {
       week3.push({
@@ -53,13 +53,13 @@ export const dateConversions = data => {
         weekDay: moment(data[i].start_date_local).day()
       })
     } else if (
-      moment(data[i].start_date_local).format('YYYY-MM-DD') >
+      moment(data[i].start_date_local).format('YYYY-MM-DD') >=
         moment()
-          .subtract(28 + difference, 'd')
+          .subtract(21 - difference, 'd')
           .format('YYYY-MM-DD') &&
-      moment(data[i].start_date_local).format('YYYY-MM-DD') <=
+      moment(data[i].start_date_local).format('YYYY-MM-DD') <
         moment()
-          .subtract(21 + difference, 'd')
+          .subtract(14 - difference, 'd')
           .format('YYYY-MM-DD')
     ) {
       week4.push({

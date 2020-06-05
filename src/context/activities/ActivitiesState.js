@@ -67,11 +67,15 @@ const ActivitiesState = props => {
   }
 
   // intergrate with strava
-  const intergrateStrava = async token => {
+  const intergrateStrava = async (token, history) => {
     try {
       const res = await axios.post(
-        `https://agile-retreat-42559.herokuapp.com//api/v1/auth?scope=read,activity:read&code=${token}`
+        `https://agile-retreat-42559.herokuapp.com//api/v1/auth?scope=read,activity:read_all,read_all&code=${token}`
       )
+      // delayed to appear like its doing something and pushing
+      setTimeout(() => {
+        history.push('/dashboard')
+      }, 1000)
       console.log(res)
     } catch (err) {
       console.log(err.response.data)

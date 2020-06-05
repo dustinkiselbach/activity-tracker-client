@@ -11,10 +11,10 @@ export const toKmPerHour = (meters, seconds) => {
 }
 
 export const toMinutesPer = speed => {
-  let x = 60 / speed,
-    y = x.toString().split('.'),
-    z = parseFloat(`.${y[1]}`),
-    a = parseInt(y[0]) + z
+  let x = 60 / speed
+  // y = x.toString().split('.'),
+  // z = parseFloat(`.${y[1]}`),
+  // a = parseInt(y[0]) + z
 
-  return Math.round(a * 100) / 100
+  return x
 }

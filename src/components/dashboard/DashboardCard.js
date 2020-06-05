@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
 import Moment from 'react-moment'
 import moment from 'moment'
 import {
@@ -9,15 +10,35 @@ import {
   toMinutesPer
 } from '../../utils/unitConversions'
 
-const DashboardCard = ({ activity, user, imperialToggle }) => {
+const DashboardCard = ({ activity, imperialToggle }) => {
   const {
     name,
     id,
+    user_id,
     start_date_local,
     activity_type,
     activity_time,
     distance
   } = activity
+
+  const [user, setUser] = useState({})
+
+  // TODO memory leak when the state does not fully load and profile is loaded
+
+  useEffect(() => {
+    const fetchUser = async id => {
+      try {
+        const res = await axios.get(
+          `https://agile-retreat-42559.herokuapp.com//api/v1/users/${id}`
+        )
+
+        setUser(res.data)
+      } catch (err) {
+        throw err
+      }
+    }
+    fetchUser(user_id)
+  }, [])
 
   // metres/s to km/h
   const timeKm = toKmPerHour(activity_time, distance)
@@ -26,8 +47,16 @@ const DashboardCard = ({ activity, user, imperialToggle }) => {
   const distanceMiles = metersToMiles(distance)
   const timeMiles = toMilesPerHour(activity_time, distance)
   // converting to km and minutes per mile or kilometer
-  const minPerMile = toMinutesPer(timeMiles)
-  const minPerKm = toMinutesPer(timeKm)
+  // min/mile
+  const minPerMileFloat = toMinutesPer(timeMiles)
+  const formattingMinMile = moment.duration(minPerMileFloat, 'm')
+  const minPerMile = formattingMinMile.format('hh:mm:ss')
+  // min/km
+  const minPerKmFloat = toMinutesPer(timeKm)
+  const formattingMinKm = moment.duration(minPerKmFloat, 'm')
+  const minPerKm = formattingMinKm.format('hh:mm:ss')
+  // min/km
+
   // to format seconds into hours minutes and seconds
   const duration = moment.duration(activity_time, 'seconds')
   const activityLength = duration.format('hh:mm:ss')
@@ -37,7 +66,7 @@ const DashboardCard = ({ activity, user, imperialToggle }) => {
       <span className='material-icons share'>share</span>
       <div className='card__main'>
         <div className='card__main--left'>
-          <img src='http://203.153.40.19/bct/img/user.png' alt='profile' />
+          <img src={user.profile_image} alt='profile' />
           <span className='material-icons'>
             {activity_type === 'Run' ? 'directions_run' : 'directions_bike'}
           </span>

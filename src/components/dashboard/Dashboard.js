@@ -32,6 +32,9 @@ const Dashboard = () => {
   const userContext = useContext(UserContext)
   const { user } = userContext
 
+  // const profileContext = useContext(ProfileContext)
+  // const { profile, getProfile } = profileContext
+
   useEffect(() => {
     // have to set headers before stuff is fetched
     if (!userContext.loading && activities.length === 0) {
@@ -68,53 +71,58 @@ const Dashboard = () => {
   }, [pages])
 
   return (
-    <section className='dashboard'>
-      {loading ? null : activities.length > 0 ? (
-        // there are activities
-        <>
-          <div className='sidebar'>
-            <div className='sidebar__top'>
-              <h3>{!imperialToggle ? 'Metric' : 'Imperial'}</h3>
-              <Toggler
-                onClick={e => {
-                  e.preventDefault()
-                  localStorage.setItem('imperial', !imperialToggle)
-                  setToggle(!imperialToggle)
-                }}
-                toggle={imperialToggle}
-              />
-            </div>
+    <>
+      {/* TODO make sure this shit will work this won't work when a new user joins*/}
+      {Object.keys(pagination).length > 0 && (
+        <section className='dashboard'>
+          {loading ? null : pagination.total > 0 ? (
+            // there are activities
+            <>
+              <div className='sidebar'>
+                <div className='sidebar__top'>
+                  <h3>{!imperialToggle ? 'Metric' : 'Imperial'}</h3>
+                  <Toggler
+                    onClick={e => {
+                      e.preventDefault()
+                      localStorage.setItem('imperial', !imperialToggle)
+                      setToggle(!imperialToggle)
+                    }}
+                    toggle={imperialToggle}
+                  />
+                </div>
 
-            <DashboardSidebar activities={activities[0]} user={user} />
-          </div>
-          <div className='activities'>
-            {pages.map((page, index) => (
-              <React.Fragment key={index}>
-                {activities[index] && (
-                  <>
-                    <DashboardActivities
-                      activities={activities[index]}
-                      user={user}
-                      imperialToggle={imperialToggle}
-                    />
-                    {/* TEST */}
-                    <div ref={ref} />
-                  </>
-                )}
-              </React.Fragment>
-            ))}
-          </div>
-        </>
-      ) : (
-        // there are no activities
-        <div>
-          You have no activities, please intergrate{' '}
-          <a href={stravaURL} className='btn'>
-            Intergrate
-          </a>
-        </div>
+                <DashboardSidebar activities={activities[0]} user={user} />
+              </div>
+              <div className='activities'>
+                {pages.map((page, index) => (
+                  <React.Fragment key={index}>
+                    {activities[index] && (
+                      <>
+                        <DashboardActivities
+                          activities={activities[index]}
+                          user={user}
+                          imperialToggle={imperialToggle}
+                        />
+                        {/* TEST */}
+                        <div ref={ref} />
+                      </>
+                    )}
+                  </React.Fragment>
+                ))}
+              </div>
+            </>
+          ) : (
+            // there are no activities
+            <div>
+              You have no activities, please intergrate{' '}
+              <a href={stravaURL} className='btn'>
+                Intergrate
+              </a>
+            </div>
+          )}
+        </section>
       )}
-    </section>
+    </>
   )
 }
 

@@ -13,70 +13,74 @@
       }
     }
     &--activities-summary {
+      display: grid;
+      grid-template-columns: min-content repeat(2, 1fr);
       .total-activities {
+        padding: 2rem;
         span {
           font-size: 2rem;
           font-weight: 700;
         }
       }
 
-      .summary-visualization {
-        &__table {
-          table-layout: fixed;
-          width: 50%;
-          border-collapse: collapse;
-          background-color: $color-light;
-          overflow: hidden;
-          box-shadow: 0 0.4rem 0.8rem rgba(black, 0.1);
-          border-radius: 5px;
+      .summary-graph {
+        padding-top: 15px;
+      }
 
+      .summary-table {
+        table-layout: fixed;
+        border-collapse: collapse;
+        background-color: $color-light;
+        overflow: hidden;
+        box-shadow: 0 0.4rem 0.8rem rgba(black, 0.1);
+        border-radius: 5px;
+        height: 100%;
+        td {
+          text-align: center;
+        }
+
+        thead {
+          font-weight: 700;
+          background-color: rgba($color-dark, 0.2);
+        }
+
+        tbody {
           td {
-            text-align: center;
-          }
-
-          thead {
-            font-weight: 700;
-            background-color: rgba($color-dark, 0.2);
-          }
-
-          tbody {
-            td {
-              cursor: pointer;
-              position: relative;
-              &.active {
-                time {
-                  opacity: 1;
-                }
-                span {
-                  opacity: 0;
-                }
-              }
-
+            cursor: pointer;
+            position: relative;
+            &.active {
               time {
-                // display: none;
-                position: absolute;
-                opacity: 0;
-                font-weight: 400;
-                font-size: 1.2rem;
-                text-decoration: underline;
-                transition: all 0.2s ease-in-out;
-                top: -2.5px;
+                opacity: 1;
               }
               span {
-                opacity: 1;
-                transition: all 0.2s ease-in-out;
-                &.filled {
-                  color: $color-primary;
-                }
+                opacity: 0;
               }
+            }
 
-              &:hover {
-                & time {
-                  opacity: 1;
-                }
-                & span {
-                  opacity: 0;
-                }
+            time {
+              // display: none;
+              position: absolute;
+              opacity: 0;
+              font-weight: 400;
+              font-size: 1.2rem;
+              text-decoration: underline;
+              transition: all 0.2s ease-in-out;
+              // top: -2.5px;
+            }
+            span {
+              opacity: 1;
+              transition: all 0.2s ease-in-out;
+              &.filled {
+                color: $color-primary;
+              }
+            }
+
+            &:hover {
+              & time {
+                opacity: 1;
+              }
+              & span {
+                opacity: 0;
               }
             }
           }

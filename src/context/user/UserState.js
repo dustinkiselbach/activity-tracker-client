@@ -183,6 +183,10 @@ const UserState = props => {
       payload: {}
     })
     setAlert('You have been logged out')
+    // TODO find a better way to deal with this
+    // its flashing to dashboard but for now
+    // this will clear the state after a user logs out
+    window.location.reload(false)
   }
 
   // clear error

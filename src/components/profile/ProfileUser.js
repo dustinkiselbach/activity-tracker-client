@@ -1,12 +1,12 @@
 import React from 'react'
 
-const ProfileUser = ({ user }) => {
+const ProfileUser = ({ profile }) => {
   return (
     <>
-      {user && (
+      {profile && (
         <>
-          <h1 className='title-secondary'>{user.email}</h1>
-          <img src='http://203.153.40.19/bct/img/user.png' alt='' />
+          <h1 className='title-secondary'>{profile.email}</h1>
+          <img src={profile.profile_image} alt='' />
         </>
       )}
     </>
