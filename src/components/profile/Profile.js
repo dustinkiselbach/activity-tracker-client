@@ -8,7 +8,7 @@ import ProfileOverview from './ProfileOverview'
 
 const Profile = ({ match }) => {
   const profileContext = useContext(ProfileContext)
-  const { profile, getProfile, getUserProfile } = profileContext
+  const { profile, getProfile, getUserProfile, imperialToggle } = profileContext
 
   const activitiesContext = useContext(ActivitiesContext)
   const { activities } = activitiesContext
@@ -34,7 +34,7 @@ const Profile = ({ match }) => {
         </div>
       </div>
       <div className='profile__metrics'>
-        <ProfileOverview profile={profile} />
+        <ProfileOverview profile={profile} imperialToggle={imperialToggle} />
       </div>
     </section>
   )

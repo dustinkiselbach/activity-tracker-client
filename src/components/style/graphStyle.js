@@ -29,7 +29,8 @@ export const graphStyle = () => {
       tickLabels: {
         fill: colorDark,
         fontFamily: 'inherit',
-        fontSize: 10
+        fontSize: 10,
+        angle: 45
       }
     },
     // DATA SET ONE

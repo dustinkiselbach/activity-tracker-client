@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Table = ({ splits }) => {
+const Table = ({ splits, paceUnit }) => {
   return (
     <table className='splits-table'>
       <caption>Splits</caption>
@@ -16,7 +16,9 @@ const Table = ({ splits }) => {
         {splits.map(split => (
           <tr key={split.split}>
             <th>{split.split}</th>
-            <th>{split.average_speed} m/s</th>
+            <th>
+              {split.pace} {paceUnit}
+            </th>
             <th>{Math.round(split.average_heartrate)} bpm</th>
             <th>{split.elevation_difference} m</th>
           </tr>

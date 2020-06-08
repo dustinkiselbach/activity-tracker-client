@@ -62,7 +62,7 @@ const Navbar = () => {
               </NavLink>
             </li>
             <li className='navbar__nav--item'>
-              <a href='/#'>Training</a>
+              <NavLink to='/calendar'>Training</NavLink>
             </li>
             <li className='navbar__nav--item'>
               <a href='/#'>Explore</a>

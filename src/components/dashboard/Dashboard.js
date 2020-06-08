@@ -18,7 +18,6 @@ const Dashboard = () => {
     rootMargin: '400px 0px'
   })
 
-  const [imperialToggle, setToggle] = useState(false)
   const [pages, setPages] = useState([1])
 
   const activitiesContext = useContext(ActivitiesContext)
@@ -34,25 +33,24 @@ const Dashboard = () => {
   const { user } = userContext
 
   const profileContext = useContext(ProfileContext)
-  const { profile, getProfile } = profileContext
+  const {
+    profile,
+    getProfile,
+    changeUnitPreference,
+    imperialToggle
+  } = profileContext
 
   useEffect(() => {
     // have to set headers before stuff is fetched
     if (!userContext.loading && activities.length === 0) {
-      syncActivities()
+      // need to redo this
+      // syncActivities()
       getProfile(user.sub)
       getActivities(1)
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userContext.loading])
-
-  // Checking if localstorage set for imperial or not
-  useEffect(() => {
-    if (localStorage.getItem('imperial') === 'true') {
-      setToggle(true)
-    }
-  }, [])
 
   // if ref is in view add another item to array
 
@@ -86,8 +84,8 @@ const Dashboard = () => {
                   <Toggler
                     onClick={e => {
                       e.preventDefault()
-                      localStorage.setItem('imperial', !imperialToggle)
-                      setToggle(!imperialToggle)
+
+                      changeUnitPreference()
                     }}
                     toggle={imperialToggle}
                   />

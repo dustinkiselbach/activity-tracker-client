@@ -2,7 +2,7 @@ import React from 'react'
 import { VictoryAxis, VictoryLine } from 'victory'
 import { graphStyle } from '../style/graphStyle'
 
-const Graph = ({ splits, shown }) => {
+const Graph = ({ splits, shown, paceUnit }) => {
   // organizing data
   const tickValues = splits.map(split => split.split)
 
@@ -21,6 +21,8 @@ const Graph = ({ splits, shown }) => {
     y: split.elevation_difference
   }))
 
+  console.log(paceUnit)
+
   const data = {
     tickValues,
     avgHr: {
@@ -35,11 +37,18 @@ const Graph = ({ splits, shown }) => {
     },
     avgSpeed: {
       dataSet: avgSpeed,
-      domainY: [
-        Math.floor(Math.min(...avgSpeed.map(item => item.y))),
-        Math.ceil(Math.max(...avgSpeed.map(item => item.y)))
-      ],
-      tickFormat: 'm/s',
+      domainY:
+        // to see if which direction lines need to be
+        paceUnit === 'min/m' || paceUnit === 'min/km'
+          ? [
+              Math.ceil(Math.max(...avgSpeed.map(item => item.y))),
+              Math.floor(Math.min(...avgSpeed.map(item => item.y)))
+            ]
+          : [
+              Math.floor(Math.min(...avgSpeed.map(item => item.y))),
+              Math.ceil(Math.max(...avgSpeed.map(item => item.y)))
+            ],
+      tickFormat: paceUnit,
       axisStyle: 'axisTwo',
       lineStyle: 'lineTwo'
     },
@@ -54,6 +63,8 @@ const Graph = ({ splits, shown }) => {
       lineStyle: 'lineThree'
     }
   }
+
+  console.log(data)
 
   const styles = graphStyle()
 

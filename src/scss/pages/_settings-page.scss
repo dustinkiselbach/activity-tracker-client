@@ -31,8 +31,12 @@
           border-radius: 5px;
           overflow: hidden;
           display: flex;
+          height: 72px;
+
+          align-items: center;
           transition: all 0.2s ease-in-out;
           cursor: pointer;
+
           & span {
             margin-left: 1rem;
             font-weight: 400;
@@ -41,13 +45,36 @@
               transition: all 0.2s ease-in-out;
             }
           }
+
           &:last-child {
             border-bottom: 1px solid rgba($color-dark, 0.1);
           }
+
           &:hover {
             background-color: rgba($color-primary, 0.5);
             & span.material-icons {
               opacity: 1;
+            }
+          }
+
+          &.active {
+            background-color: rgba($color-primary, 0.5);
+            & span.material-icons {
+              opacity: 1;
+            }
+
+            & .form__text {
+              display: flex;
+              margin-bottom: 0;
+              input {
+                border: 1px solid black;
+                border-radius: 5px;
+                padding: 0;
+                font-size: inherit;
+                &:focus {
+                  border: 1px solid red;
+                }
+              }
             }
           }
         }

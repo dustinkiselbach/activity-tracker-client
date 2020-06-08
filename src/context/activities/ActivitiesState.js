@@ -6,7 +6,11 @@ import {
   GET_ACTIVITIES,
   GET_ACTIVITIES_PAGINATION,
   GET_ACTIVITY,
-  SET_LOADING
+  SET_LOADING,
+  PARSE_ACTIVITY_RUN_METRIC,
+  PARSE_ACTIVITY_RUN_IMPERIAL,
+  PARSE_ACTIVITY_RIDE_METRIC,
+  PARSE_ACTIVITY_RIDE_IMPERIAL
 } from '../types'
 
 const ActivitiesState = props => {
@@ -14,6 +18,8 @@ const ActivitiesState = props => {
     activities: [],
     pagination: {},
     activity: null,
+    activityParsed: false,
+
     loading: false
   }
 
@@ -82,6 +88,24 @@ const ActivitiesState = props => {
     }
   }
 
+  // parse data from metric into imperial
+  const parseActivity = (activity, imperialToggle) => {
+    console.log(activity.activity.activity_type, imperialToggle)
+    // Default
+    if (activity.activity.activity_type === 'Run') {
+      if (!imperialToggle) {
+        dispatch({ type: PARSE_ACTIVITY_RUN_METRIC })
+      } else {
+        dispatch({ type: PARSE_ACTIVITY_RUN_IMPERIAL })
+      }
+    } else {
+      if (!imperialToggle) {
+        dispatch({ type: PARSE_ACTIVITY_RIDE_METRIC })
+      } else {
+        dispatch({ type: PARSE_ACTIVITY_RIDE_IMPERIAL })
+      }
+    }
+  }
   // Set loading
   const setLoading = () => {
     dispatch({ type: SET_LOADING })
@@ -93,9 +117,11 @@ const ActivitiesState = props => {
         activities: state.activities,
         pagination: state.pagination,
         activity: state.activity,
+        activityParsed: state.activityParsed,
         loading: state.loading,
         getActivities,
         getActivity,
+        parseActivity,
         syncActivities,
         intergrateStrava
       }}

@@ -19,6 +19,7 @@ import ActivitiesState from './context/activities/ActivitiesState'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import PrivateRoute from './components/common/PrivateRoute'
 import Settings from './components/settings/Settings'
+import CalendarPage from './components/pages/CalendarPage'
 
 function App () {
   return (
@@ -58,6 +59,7 @@ function App () {
                 />
 
                 <PrivateRoute exact path='/dashboard' component={Dashboard} />
+                <PrivateRoute exact path='/calendar' component={CalendarPage} />
                 <PrivateRoute exact path='/settings' component={Settings} />
                 <PrivateRoute exact path='/profile' component={Profile} />
                 <PrivateRoute exact path='/profile/:id' component={Profile} />

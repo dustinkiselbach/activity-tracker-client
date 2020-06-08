@@ -4,7 +4,10 @@ import Toggler from '../common/Toggler'
 import Graph from '../common/Graph'
 
 const ActivityMetrics = ({ activity }) => {
-  const { splits } = activity
+  const {
+    splits,
+    activity: { paceUnit }
+  } = activity
 
   const [shown, setShown] = useState([{ id: 'avgHr' }])
 
@@ -24,8 +27,8 @@ const ActivityMetrics = ({ activity }) => {
 
   return (
     <div className='activity-page__metrics m-2'>
-      <Table splits={splits} />
-      <Graph splits={splits} shown={shown} />
+      <Table splits={splits} paceUnit={paceUnit} />
+      <Graph splits={splits} shown={shown} paceUnit={paceUnit} />
       {/* <Graph splits={splits} /> */}
       <div className='togglers'>
         {togglers.map(toggler => (

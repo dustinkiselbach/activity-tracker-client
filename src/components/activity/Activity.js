@@ -1,13 +1,21 @@
 import React, { useState, useEffect, useContext } from 'react'
 import ActivitiesContext from '../../context/activities/activitiesContext'
 import UserContext from '../../context/user/userContext'
+import ProfileContext from '../../context/profile/profileContext'
 import ActivityCard from './ActivityCard'
 import ActivityMetrics from './ActivityMetrics'
 
 const Activity = ({ match }) => {
   const activitiesContext = useContext(ActivitiesContext)
-  const { getActivity, activity } = activitiesContext
+  const {
+    getActivity,
+    activity,
+    parseActivity,
+    activityParsed
+  } = activitiesContext
   const userContext = useContext(UserContext)
+  const profileContext = useContext(ProfileContext)
+  const { imperialToggle } = profileContext
 
   const [openCard, setOpen] = useState(true)
 
@@ -16,6 +24,13 @@ const Activity = ({ match }) => {
       getActivity(match.params.id)
     }
   }, [userContext.loading])
+
+  useEffect(() => {
+    if (activity && !activityParsed) {
+      console.log('from activity')
+      parseActivity(activity, imperialToggle)
+    }
+  }, [activity, imperialToggle])
 
   return (
     <>

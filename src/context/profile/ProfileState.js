@@ -1,15 +1,23 @@
-import React, { useReducer } from 'react'
+import React, { useReducer, useEffect } from 'react'
 import ProfileContext from './profileContext'
 import axios from 'axios'
 import profileReducer from './profileReducer'
-import { GET_PROFILE } from '../types'
+import { GET_PROFILE, CHANGE_UNIT_PREFERENCE } from '../types'
 
 const ProfileState = props => {
   const initialState = {
-    profile: null
+    profile: null,
+    imperialToggle: false
   }
 
   const [state, dispatch] = useReducer(profileReducer, initialState)
+
+  // Checking if localstorage set for imperial or not
+  useEffect(() => {
+    if (localStorage.getItem('imperial') === 'true') {
+      changeUnitPreference()
+    }
+  }, [])
 
   // get profile
   const getUserProfile = async () => {
@@ -36,12 +44,20 @@ const ProfileState = props => {
     }
   }
 
+  // change unit preference
+  const changeUnitPreference = () => {
+    localStorage.setItem('imperial', !state.imperialToggle)
+    dispatch({ type: CHANGE_UNIT_PREFERENCE })
+  }
+
   return (
     <ProfileContext.Provider
       value={{
         profile: state.profile,
+        imperialToggle: state.imperialToggle,
         getUserProfile,
-        getProfile
+        getProfile,
+        changeUnitPreference
       }}
     >
       {props.children}

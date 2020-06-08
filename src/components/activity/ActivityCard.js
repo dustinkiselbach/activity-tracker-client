@@ -1,27 +1,52 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
+import axios from 'axios'
 import Moment from 'react-moment'
-import moment from 'moment'
 
 const ActivityCard = ({ activity, openCard, setOpen }) => {
   const {
     activity_time,
     activity_type,
     avg_hr,
-    created_at,
+    start_date_local,
     distance,
     calories,
-    name
+    name,
+    pace,
+    user_id,
+    paceUnit,
+    distanceUnit
   } = activity.activity
 
-  // to format seconds into hours minutes and seconds
-  const duration = moment.duration(activity_time, 'seconds')
-  const activityLength = duration.format('hh:mm:ss')
+  const [user, setUser] = useState({})
+
+  // TODO memory leak when the state does not fully load and profile is loaded
+
+  useEffect(() => {
+    const fetchUser = async id => {
+      try {
+        const res = await axios.get(
+          `https://agile-retreat-42559.herokuapp.com//api/v1/users/${id}`
+        )
+
+        setUser(res.data)
+      } catch (err) {
+        throw err
+      }
+    }
+    fetchUser(user_id)
+  }, [user_id])
+
+  // // to format seconds into hours minutes and seconds
+  // const duration = moment.duration(activity_time, 'seconds')
+  // const activityLength = duration.format('hh:mm:ss')
 
   return (
     <div className='detail-card m-2'>
       <div className='detail-card__header'>
-        <h3>NAMEPLACEHOLDER - {activity_type}</h3>
+        <h3>
+          {user.name} - {activity_type}
+        </h3>
 
         <span onClick={() => setOpen(!openCard)}>close</span>
       </div>
@@ -33,10 +58,12 @@ const ActivityCard = ({ activity, openCard, setOpen }) => {
           className='detail-card__main'
         >
           <div className='detail-card__main--left'>
-            <img src='http://203.153.40.19/bct/img/user.png' alt='profile' />
+            <img src={user.profile_image} alt='profile' />
             <div className='detail-card__main-left-text'>
               <small>
-                <Moment format='MM-DD-YYYY hh:mm a'>{created_at}</Moment>
+                <Moment format='MM-DD-YYYY hh:mm a' utc locale>
+                  {start_date_local}
+                </Moment>
               </small>
               <h3>{name}</h3>
             </div>
@@ -45,16 +72,18 @@ const ActivityCard = ({ activity, openCard, setOpen }) => {
             <div className='stats'>
               <div className='stats--item'>
                 <small>distance</small>
-                <div className='stat'>{distance} meters</div>
+                <div className='stat'>
+                  {distance} {distanceUnit}
+                </div>
               </div>
               <div className='stats--item'>
                 <small>moving time</small>
-                <div className='stat'>{activityLength}</div>
+                <div className='stat'>{activity_time}</div>
               </div>
               <div className='stats--item'>
                 <small>pace </small>
                 <div className='stat'>
-                  {Math.round((distance / activity_time) * 100) / 100} m/s
+                  {pace} {paceUnit}
                 </div>
               </div>
             </div>
