@@ -1,5 +1,6 @@
 import {
   GET_ACTIVITIES,
+  GET_ACTIVITIES_FOR_CALENDAR,
   GET_ACTIVITY,
   GET_ACTIVITIES_PAGINATION,
   SET_LOADING,
@@ -36,6 +37,17 @@ export default (state, action) => {
         activity: action.payload,
         loading: false,
         activityParsed: false
+      }
+    case GET_ACTIVITIES_FOR_CALENDAR:
+      return {
+        ...state,
+        activitiesForCalendar: action.payload,
+        loading: false
+      }
+    case SET_LOADING:
+      return {
+        ...state,
+        loading: true
       }
     // parsing activites
     // IMPERIAL RUN
@@ -156,11 +168,7 @@ export default (state, action) => {
           }))
         }
       }
-    case SET_LOADING:
-      return {
-        ...state,
-        loading: true
-      }
+
     default:
       return state
   }

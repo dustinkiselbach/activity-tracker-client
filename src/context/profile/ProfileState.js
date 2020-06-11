@@ -44,6 +44,20 @@ const ProfileState = props => {
     }
   }
 
+  // update profile
+  const updateProfile = async (id, data) => {
+    try {
+      const res = await axios.patch(
+        `https://agile-retreat-42559.herokuapp.com//api/v1/users/${id}`,
+        data
+      )
+      dispatch({ type: GET_PROFILE, payload: res.data })
+      console.log(res)
+    } catch (err) {
+      console.log(err.response.data)
+    }
+  }
+
   // change unit preference
   const changeUnitPreference = () => {
     localStorage.setItem('imperial', !state.imperialToggle)
@@ -57,6 +71,7 @@ const ProfileState = props => {
         imperialToggle: state.imperialToggle,
         getUserProfile,
         getProfile,
+        updateProfile,
         changeUnitPreference
       }}
     >

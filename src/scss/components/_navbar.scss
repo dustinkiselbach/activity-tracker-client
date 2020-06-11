@@ -31,6 +31,7 @@
     display: flex;
     margin-left: 2rem;
     height: 100%;
+    font-weight: 700;
 
     &--item {
       margin: 2px;
@@ -40,6 +41,7 @@
       justify-content: center;
       text-align: center;
       width: 100px;
+
       &:hover {
         background-color: rgba($color-dark, 0.1);
         border-radius: 5px;
@@ -48,7 +50,11 @@
     }
 
     & .active {
-      color: $color-primary;
+      background-color: rgba($color-dark, 0.1);
+      border-radius: 5px;
+    }
+    li {
+      font-weight: 400;
     }
   }
 

@@ -43,8 +43,7 @@ const Dashboard = () => {
   useEffect(() => {
     // have to set headers before stuff is fetched
     if (!userContext.loading && activities.length === 0) {
-      // need to redo this
-      // syncActivities()
+      syncActivities()
       getProfile(user.sub)
       getActivities(1)
     }

@@ -2,9 +2,10 @@ import React, { useState } from 'react'
 import TextField from '../common/TextField'
 import classnames from 'classnames'
 
-const SettingsEditField = ({ item, fakeProfile }) => {
+const SettingsEditField = ({ item, profile, id, updateProfile }) => {
   const [clicked, setClicked] = useState(false)
-  const [field, setField] = useState({ [item]: fakeProfile[item] })
+  const [field, setField] = useState({ [item]: profile[item] })
+  const [success, setSuccess] = useState(false)
 
   const onChange = e => {
     setField({ [item]: e.target.value })
@@ -13,21 +14,27 @@ const SettingsEditField = ({ item, fakeProfile }) => {
   const onSubmit = e => {
     e.preventDefault()
 
-    console.log(field)
+    updateProfile(id, field)
+    setClicked(c => false)
+    setSuccess(true)
+    setTimeout(() => {
+      setSuccess(false)
+    }, 2500)
   }
 
   return (
     <li
       className={classnames(null, {
-        active: clicked
+        active: clicked,
+        success
       })}
-      onClick={() => setClicked(c => true)}
+      onClick={() => !clicked && setClicked(c => true)}
     >
-      {item}:{' '}
+      <h4>{item}: </h4>
       {!clicked ? (
         <>
-          <span>{fakeProfile[item]}</span>
-          <span className='material-icons'>edit</span>
+          <span>{profile[item]}</span>
+          <span className='material-icons edit'>edit</span>
         </>
       ) : (
         <>
@@ -35,7 +42,15 @@ const SettingsEditField = ({ item, fakeProfile }) => {
           <button onClick={onSubmit} className='btn'>
             save
           </button>
-          <span>X</span>
+
+          <span
+            onClick={() => {
+              return setClicked(false)
+            }}
+            className='material-icons close'
+          >
+            close
+          </span>
         </>
       )}
     </li>

@@ -56,14 +56,20 @@ const Navbar = () => {
         </a>
         {isAuthenticated && (
           <ul className='navbar__nav'>
-            <li className='navbar__nav--item'>
-              <NavLink to='/dashboard' activeClassName='active'>
-                Dashboard
-              </NavLink>
-            </li>
-            <li className='navbar__nav--item'>
-              <NavLink to='/calendar'>Training</NavLink>
-            </li>
+            <NavLink
+              to='/dashboard'
+              className='navbar__nav--item'
+              activeClassName='active'
+            >
+              <li>Dashboard</li>
+            </NavLink>
+            <NavLink
+              to='/calendar'
+              className='navbar__nav--item'
+              activeClassName='active'
+            >
+              <li>Training</li>
+            </NavLink>
             <li className='navbar__nav--item'>
               <a href='/#'>Explore</a>
             </li>

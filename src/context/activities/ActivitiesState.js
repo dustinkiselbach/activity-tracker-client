@@ -2,8 +2,10 @@ import React, { useReducer } from 'react'
 import axios from 'axios'
 import ActivitiesContext from './activitiesContext'
 import activitiesReducer from './activitiesReducer'
+import { weekParser } from '../../utils/weekParser'
 import {
   GET_ACTIVITIES,
+  GET_ACTIVITIES_FOR_CALENDAR,
   GET_ACTIVITIES_PAGINATION,
   GET_ACTIVITY,
   SET_LOADING,
@@ -18,6 +20,7 @@ const ActivitiesState = props => {
     activities: [],
     pagination: {},
     activity: null,
+    activitiesForCalendar: null,
     activityParsed: false,
 
     loading: false
@@ -47,7 +50,7 @@ const ActivitiesState = props => {
     }
   }
 
-  // get activity by id
+  // get activity by activity id
   const getActivity = async id => {
     try {
       const res = await axios.get(
@@ -55,6 +58,25 @@ const ActivitiesState = props => {
       )
       dispatch({ type: GET_ACTIVITY, payload: res.data })
       console.log(res)
+    } catch (err) {
+      console.log(err.response.data)
+    }
+  }
+
+  // Get all acitivities associated with logged in user
+  const getActivitiesByDate = async () => {
+    setLoading()
+    try {
+      const res = await axios.get(
+        'https://agile-retreat-42559.herokuapp.com//api/v1/activities'
+      )
+
+      console.log(res)
+      const parsed = weekParser(res.data.activities)
+      dispatch({
+        type: GET_ACTIVITIES_FOR_CALENDAR,
+        payload: parsed
+      })
     } catch (err) {
       console.log(err.response.data)
     }
@@ -117,10 +139,12 @@ const ActivitiesState = props => {
         activities: state.activities,
         pagination: state.pagination,
         activity: state.activity,
+        activitiesForCalendar: state.activitiesForCalendar,
         activityParsed: state.activityParsed,
         loading: state.loading,
         getActivities,
         getActivity,
+        getActivitiesByDate,
         parseActivity,
         syncActivities,
         intergrateStrava

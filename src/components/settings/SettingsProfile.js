@@ -1,24 +1,19 @@
 import React from 'react'
 import SettingsEditField from './SettingsEditField'
 
-const fakeProfile = {
-  name: 'farter mcgavin',
-  birthday: '69/69/6969',
-  gender: 'non-binary',
-  location: 'tartsdale'
-}
-
-const SettingsProfile = () => {
+const SettingsProfile = ({ profile, updateProfile, id }) => {
   return (
     <>
       <h1 className='title'>My Profile</h1>
       <div className='edit'>
         <ul>
-          {Object.keys(fakeProfile).map(item => (
+          {Object.keys(profile).map(item => (
             <SettingsEditField
-              fakeProfile={fakeProfile}
+              profile={profile}
               key={item}
               item={item}
+              updateProfile={updateProfile}
+              id={id}
             />
           ))}
         </ul>
