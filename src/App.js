@@ -60,6 +60,11 @@ function App () {
 
                 <PrivateRoute exact path='/dashboard' component={Dashboard} />
                 <PrivateRoute exact path='/calendar' component={CalendarPage} />
+                <PrivateRoute
+                  exact
+                  path='/calendar/:year'
+                  component={CalendarPage}
+                />
                 <PrivateRoute exact path='/settings' component={Settings} />
                 <PrivateRoute exact path='/profile' component={Profile} />
                 <PrivateRoute exact path='/profile/:id' component={Profile} />

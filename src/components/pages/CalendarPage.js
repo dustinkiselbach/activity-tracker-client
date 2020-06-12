@@ -3,8 +3,9 @@ import TrainingCalendarHeader from '../trainingCalendar/TrainingCalendarHeader'
 import TrainingCalendar from '../trainingCalendar/TrainingCalendar'
 import ActivitiesContext from '../../context/activities/activitiesContext'
 
-const CalendarPage = ({ year = 2020 }) => {
+const CalendarPage = () => {
   const [selected, setSelected] = useState('activity_time')
+  const [year, setYear] = useState(2020)
 
   const activitiesContext = useContext(ActivitiesContext)
 
@@ -15,10 +16,8 @@ const CalendarPage = ({ year = 2020 }) => {
   } = activitiesContext
 
   useEffect(() => {
-    getActivitiesByDate()
-  }, [])
-
-  console.log(selected)
+    getActivitiesByDate(year)
+  }, [year])
 
   return (
     <>
@@ -26,8 +25,19 @@ const CalendarPage = ({ year = 2020 }) => {
         <section className='calendar-page'>
           <h1 className='title'>Training Calendar</h1>
           <h3>
-            <span className='material-icons'>keyboard_arrow_left</span>2020
-            <span className='material-icons'>keyboard_arrow_right</span>
+            <span
+              onClick={() => setYear(y => y - 1)}
+              className='material-icons'
+            >
+              keyboard_arrow_left
+            </span>
+            {year}
+            <span
+              onClick={() => setYear(y => y + 1)}
+              className='material-icons'
+            >
+              keyboard_arrow_right
+            </span>
           </h3>
           <TrainingCalendarHeader
             activitiesForCalendar={activitiesForCalendar}

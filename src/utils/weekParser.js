@@ -34,6 +34,38 @@ const yearlySummaryCalculator = weeksFormatted => {
   return { distance, activity_time, activities }
 }
 
+const getDaysInMonths = (year, months) => {
+  let monthsDays = []
+  for (let i = 0; i < months.length; i++) {
+    let days = moment(`${year}-${months[i] + 1}`).daysInMonth()
+    monthsDays.push(days)
+  }
+
+  return monthsDays
+}
+
+const dailySummaryCalculator = monthsDaysArr => {
+  let formatted = []
+
+  for (let i = 0; i < monthsDaysArr.length; i++) {
+    let month = []
+    for (let y = 0; y < monthsDaysArr[i].length; y++) {
+      let distance = 0
+      let activity_time = 0
+      let day_number = y + 1
+      let activities = 0
+      for (let j = 0; j < monthsDaysArr[i][y].length; j++) {
+        distance += monthsDaysArr[i][y][j].distance
+        activity_time += monthsDaysArr[i][y][j].activity_time
+        activities++
+      }
+      month.push({ distance, activity_time, activities, day_number })
+    }
+    formatted.push(month)
+  }
+  return formatted
+}
+
 export const weekParser = data => {
   const weeksInYear = Array.from(Array(52), (e, i) => i + 1)
   const monthsInYear = Array.from(Array(12).keys())
@@ -42,13 +74,25 @@ export const weekParser = data => {
   const weeks = weeksInYear.map(week =>
     data.filter(item => moment(item.start_date_local).weeks() === week)
   )
-  // map through and filter to organize by month
-  const months = monthsInYear.map(month =>
-    data.filter(item => moment(item.start_date_local).month() === month)
+
+  // gets the days in the month
+  const monthsWithDayCount = getDaysInMonths(2020, monthsInYear)
+  // get arrays of each day of month
+  const monthsWithDayArrays = monthsWithDayCount.map(month =>
+    Array.from(Array(month), (e, i) => i + 1)
+  )
+  // map through and filter to get each activity assigned to day
+  const monthsDaysActArr = monthsWithDayArrays.map((month, index) =>
+    month.map(day =>
+      data.filter(
+        item =>
+          moment(item.start_date_local).date() === day &&
+          moment(item.start_date_local).month() === index
+      )
+    )
   )
 
-  const monthsFormatted = months.map(month => month.reverse())
-
+  const monthsFormatted = dailySummaryCalculator(monthsDaysActArr)
   const weeksFormatted = weeklySummaryCalculator(weeks)
   const yearFormatted = yearlySummaryCalculator(weeksFormatted)
 

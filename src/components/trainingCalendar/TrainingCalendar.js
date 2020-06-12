@@ -20,7 +20,6 @@ const TrainingCalendar = ({
   selected,
   activitiesForCalendar: { monthsFormatted }
 }) => {
-  console.log(monthsFormatted)
   return (
     <div className='calendar-page__calendar'>
       {months.map((month, index) => (

@@ -64,11 +64,13 @@ const ActivitiesState = props => {
   }
 
   // Get all acitivities associated with logged in user
-  const getActivitiesByDate = async () => {
+  const getActivitiesByDate = async date => {
     setLoading()
+
     try {
       const res = await axios.get(
-        'https://agile-retreat-42559.herokuapp.com//api/v1/activities'
+        `https://agile-retreat-42559.herokuapp.com//api/v1/activities?start_date=${date}-01-01&end_date=${date +
+          1}-01-01`
       )
 
       console.log(res)
