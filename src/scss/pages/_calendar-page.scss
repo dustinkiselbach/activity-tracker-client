@@ -9,24 +9,38 @@
         color: $color-complement;
       }
     }
+    .year {
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
   }
 
   &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     .summary-text {
-      width: 33.3%;
+      // width: 33.3%;
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-start;
+      padding: 1rem;
       &--item {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         cursor: pointer;
+        &:not(:last-child) {
+          margin-right: 1.5rem;
+        }
 
         .stat {
-          font-size: 1.5rem;
+          font-size: 1.8rem;
           font-weight: 400;
           transition: all 0.2s ease-in-out;
+          &:hover {
+            color: $color-complement;
+          }
         }
         .selected {
           color: $color-complement;
@@ -35,8 +49,12 @@
     }
 
     .summary-graph {
-      width: 33.3%;
-      // background-color: green;
+      display: flex;
+      .label {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
     }
   }
 
@@ -61,10 +79,26 @@
       transition: all 0.2s ease-in-out;
       cursor: pointer;
 
-      &__label {
+      &--label {
         font-size: 2rem;
         margin-right: 5px;
         margin-top: 5px;
+      }
+
+      &--metric {
+        position: absolute;
+        top: 25%;
+        // transform: translateY(-50%);
+        left: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .stat {
+          font-size: 1.5rem;
+          font-weight: 400;
+        }
       }
 
       &__graph {

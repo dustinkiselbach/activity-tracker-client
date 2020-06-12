@@ -49,7 +49,14 @@ const dailySummaryCalculator = monthsDaysArr => {
 
   for (let i = 0; i < monthsDaysArr.length; i++) {
     let month = []
+    // totals for the month
+    let totals = {
+      distance: 0,
+      activity_time: 0,
+      activities: 0
+    }
     for (let y = 0; y < monthsDaysArr[i].length; y++) {
+      // calculating totals for each day
       let distance = 0
       let activity_time = 0
       let day_number = y + 1
@@ -59,14 +66,18 @@ const dailySummaryCalculator = monthsDaysArr => {
         activity_time += monthsDaysArr[i][y][j].activity_time
         activities++
       }
+      // adding to total of the month
+      totals.distance += distance
+      totals.activity_time += activity_time
+      totals.activities += activities
       month.push({ distance, activity_time, activities, day_number })
     }
-    formatted.push(month)
+    formatted.push({ totals, month })
   }
   return formatted
 }
 
-export const weekParser = data => {
+export const weekParser = (data, year) => {
   const weeksInYear = Array.from(Array(52), (e, i) => i + 1)
   const monthsInYear = Array.from(Array(12).keys())
 
@@ -76,7 +87,7 @@ export const weekParser = data => {
   )
 
   // gets the days in the month
-  const monthsWithDayCount = getDaysInMonths(2020, monthsInYear)
+  const monthsWithDayCount = getDaysInMonths(year, monthsInYear)
   // get arrays of each day of month
   const monthsWithDayArrays = monthsWithDayCount.map(month =>
     Array.from(Array(month), (e, i) => i + 1)

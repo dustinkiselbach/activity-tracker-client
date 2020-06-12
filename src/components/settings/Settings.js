@@ -1,9 +1,28 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import SettingsNav from './SettingsNav'
 import SettingsProfile from './SettingsProfile'
 import ProfileContext from '../../context/profile/profileContext'
+import SettingsDisplay from './SettingsDisplay'
+import SettingsAccount from './SettingsAccount'
+
+const navItems = [
+  {
+    title: 'My Profile',
+    id: 'profile'
+  },
+  {
+    title: 'My Account',
+    id: 'account'
+  },
+  {
+    title: 'Display Preferences',
+    id: 'display'
+  }
+]
 
 const Settings = () => {
+  const [selected, setSelected] = useState('profile')
+
   const profileContext = useContext(ProfileContext)
 
   const { profile, getUserProfile, updateProfile } = profileContext
@@ -21,13 +40,21 @@ const Settings = () => {
 
   return (
     <section className='settings'>
-      <SettingsNav />
+      <SettingsNav
+        navItems={navItems}
+        setSelected={setSelected}
+        selected={selected}
+      />
       <div className='settings-main'>
-        <SettingsProfile
-          profile={updatableProfile}
-          updateProfile={updateProfile}
-          id={profile.id}
-        />
+        {selected === 'profile' && (
+          <SettingsProfile
+            profile={updatableProfile}
+            updateProfile={updateProfile}
+            id={profile.id}
+          />
+        )}
+        {selected === 'account' && <SettingsAccount />}
+        {selected === 'display' && <SettingsDisplay />}
       </div>
     </section>
   )

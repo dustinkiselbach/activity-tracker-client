@@ -31,7 +31,7 @@ const CalendarPage = () => {
             >
               keyboard_arrow_left
             </span>
-            {year}
+            <div className='year'>{year}</div>
             <span
               onClick={() => setYear(y => y + 1)}
               className='material-icons'

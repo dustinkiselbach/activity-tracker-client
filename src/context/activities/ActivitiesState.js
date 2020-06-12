@@ -64,17 +64,17 @@ const ActivitiesState = props => {
   }
 
   // Get all acitivities associated with logged in user
-  const getActivitiesByDate = async date => {
+  const getActivitiesByDate = async year => {
     setLoading()
 
     try {
       const res = await axios.get(
-        `https://agile-retreat-42559.herokuapp.com//api/v1/activities?start_date=${date}-01-01&end_date=${date +
+        `https://agile-retreat-42559.herokuapp.com//api/v1/activities?start_date=${year}-01-01&end_date=${year +
           1}-01-01`
       )
 
       console.log(res)
-      const parsed = weekParser(res.data.activities)
+      const parsed = weekParser(res.data.activities, year)
       dispatch({
         type: GET_ACTIVITIES_FOR_CALENDAR,
         payload: parsed

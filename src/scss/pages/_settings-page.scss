@@ -119,11 +119,16 @@
       & li {
         padding: 1rem;
         border-radius: 5px;
+        cursor: pointer;
         transition: all 0.2s ease-in-out;
         &:not(:last-child) {
           margin-bottom: 1rem;
         }
         &:hover {
+          background-color: rgba($color-dark, 0.1);
+        }
+
+        &.active {
           background-color: rgba($color-dark, 0.1);
         }
       }

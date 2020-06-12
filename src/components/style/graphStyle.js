@@ -6,6 +6,7 @@ export const graphStyle = () => {
   const colorLight = '#fff'
 
   const colorGreen = '#7c8e51'
+  const colorComplement = '#d30068'
 
   return {
     parent: {
@@ -122,6 +123,26 @@ export const graphStyle = () => {
       fontFamily: 'inherit',
       fontSize: 20,
       fontWeight: 400
+    },
+    // STYLES SPECIFIC TO CALENDAR SUMMARY BAR GRAPH
+    csMainAxis: {
+      axis: { stroke: colorComplement, strokeWidth: 0.75 },
+      tickLabels: {
+        fill: colorDark,
+        fontFamily: 'inherit',
+        fontSize: 0
+      },
+      axisLabel: {
+        fontFamily: 'inherit'
+      }
+    },
+    csBar: {
+      data: {
+        fill: colorComplement,
+
+        fillOpacity: 0.9,
+        strokeWidth: 0
+      }
     }
   }
 }

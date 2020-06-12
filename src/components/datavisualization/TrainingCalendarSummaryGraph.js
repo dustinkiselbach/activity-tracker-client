@@ -1,5 +1,6 @@
 import React from 'react'
-import { VictoryChart, VictoryBar, VictoryAxis } from 'victory'
+import { VictoryChart, VictoryBar, VictoryAxis, Bar } from 'victory'
+import { graphStyle } from '../style/graphStyle'
 
 const TrainingCalendarSummaryGraph = ({ weeksFormatted, selected }) => {
   const data = weeksFormatted.map(week => ({
@@ -7,19 +8,18 @@ const TrainingCalendarSummaryGraph = ({ weeksFormatted, selected }) => {
     x: week.week_number
   }))
 
-  console.log(data)
+  const style = graphStyle()
+
   return (
     <div className='summary-graph'>
-      <VictoryChart>
-        <VictoryAxis
-          style={{
-            tickLabels: {
-              fill: 'red',
-              fontSize: 0
-            }
-          }}
+      <VictoryChart height={127}>
+        <VictoryAxis style={style.csMainAxis} label='52 weeks' />
+        <VictoryBar
+          style={style.csBar}
+          data={data}
+          barRatio={0.8}
+          dataComponent={<Bar transform='translate(0, -2)' />}
         />
-        <VictoryBar data={data} />
       </VictoryChart>
     </div>
   )

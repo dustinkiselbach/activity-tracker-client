@@ -24,7 +24,7 @@ const TrainingCalendar = ({
     <div className='calendar-page__calendar'>
       {months.map((month, index) => (
         <TrainingCalendarItem
-          month={month}
+          label={month}
           key={month}
           activities={monthsFormatted[index]}
           selected={selected}
