@@ -25,38 +25,59 @@ const Settings = () => {
 
   const profileContext = useContext(ProfileContext)
 
-  const { profile, getUserProfile, updateProfile } = profileContext
+  const {
+    profile,
+    biometrics,
+    getUserProfile,
+    updateProfile,
+    getBiometrics,
+    setBiometrics
+  } = profileContext
   // can only update name, email weight height
-  const updatableProfile = {
-    name: profile.name,
-    email: profile.email,
-    weight: profile.weight,
-    height: profile.height
-  }
+  // const updatableProfile = {
+  //   weight: profile.weight,
+  //   height: profile.height
+  // }
 
   useEffect(() => {
     getUserProfile()
+    getBiometrics()
   }, [])
 
+  let updatableProfile
+
+  if (biometrics) {
+    updatableProfile = {
+      weight: biometrics[0].weight,
+      height: biometrics[0].height
+    }
+  }
+
   return (
-    <section className='settings'>
-      <SettingsNav
-        navItems={navItems}
-        setSelected={setSelected}
-        selected={selected}
-      />
-      <div className='settings-main'>
-        {selected === 'profile' && (
-          <SettingsProfile
-            profile={updatableProfile}
-            updateProfile={updateProfile}
-            id={profile.id}
+    <>
+      {biometrics && (
+        <section className='settings'>
+          <SettingsNav
+            navItems={navItems}
+            setSelected={setSelected}
+            selected={selected}
           />
-        )}
-        {selected === 'account' && <SettingsAccount />}
-        {selected === 'display' && <SettingsDisplay />}
-      </div>
-    </section>
+          <div className='settings-main'>
+            {selected === 'profile' && (
+              <SettingsProfile
+                profile={updatableProfile}
+                updateProfile={setBiometrics}
+                id={profile.id}
+              />
+            )}
+            {selected === 'account' && (
+              <SettingsAccount profile={updatableProfile} />
+            )}
+            {selected === 'display' && <SettingsDisplay />}
+          </div>
+        </section>
+      )}
+    </>
   )
 }
 

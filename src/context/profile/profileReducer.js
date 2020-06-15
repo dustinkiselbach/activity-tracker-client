@@ -1,4 +1,4 @@
-import { GET_PROFILE, CHANGE_UNIT_PREFERENCE } from '../types'
+import { GET_PROFILE, CHANGE_UNIT_PREFERENCE, GET_BIOMETRICS } from '../types'
 
 export default (state, action) => {
   switch (action.type) {
@@ -6,6 +6,11 @@ export default (state, action) => {
       return {
         ...state,
         profile: action.payload
+      }
+    case GET_BIOMETRICS:
+      return {
+        ...state,
+        biometrics: action.payload
       }
     case CHANGE_UNIT_PREFERENCE:
       return {

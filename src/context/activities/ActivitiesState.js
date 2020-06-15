@@ -64,7 +64,7 @@ const ActivitiesState = props => {
   }
 
   // Get all acitivities associated with logged in user
-  const getActivitiesByDate = async year => {
+  const getActivitiesByDate = async (year, unit) => {
     setLoading()
 
     try {
@@ -74,7 +74,7 @@ const ActivitiesState = props => {
       )
 
       console.log(res)
-      const parsed = weekParser(res.data.activities, year)
+      const parsed = weekParser(res.data.activities, year, unit)
       dispatch({
         type: GET_ACTIVITIES_FOR_CALENDAR,
         payload: parsed

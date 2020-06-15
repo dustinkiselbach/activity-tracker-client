@@ -19,6 +19,7 @@ export const SET_LOADING = 'SET_LOADING'
 // Profile Types
 export const GET_PROFILE = 'GET_PROFILE'
 export const CHANGE_UNIT_PREFERENCE = 'CHANGE_UNIT_PREFERENCE'
+export const GET_BIOMETRICS = 'GET_BIOMETRICS'
 // Alert Types
 export const SET_ALERT = 'SET_ALERT'
 export const REMOVE_ALERT = 'REMOVE_ALERT'

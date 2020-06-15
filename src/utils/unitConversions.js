@@ -31,3 +31,9 @@ export const minutesToTime = minutes => {
   const duration = moment.duration(minutes, 'minutes')
   return duration.format('hh:mm:ss')
 }
+
+export const secondsToHours = seconds => {
+  const duration = moment.duration(seconds, 'seconds')
+
+  return duration.hours()
+}

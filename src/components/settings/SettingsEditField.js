@@ -14,7 +14,7 @@ const SettingsEditField = ({ item, profile, id, updateProfile }) => {
   const onSubmit = e => {
     e.preventDefault()
 
-    updateProfile(id, field)
+    updateProfile(field)
     setClicked(c => false)
     setSuccess(true)
     setTimeout(() => {

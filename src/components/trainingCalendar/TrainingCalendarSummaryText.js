@@ -6,13 +6,13 @@ const TrainingCalendarSummaryText = ({
   changeSelected,
   selected
 }) => {
-  const { distance, activity_time, activities } = yearFormatted
+  const { distance, distance_unit, activities, hours } = yearFormatted
 
   return (
     <div className='summary-text'>
       <TrainingCalendarSummaryItem
         type='activity_time'
-        stat={activity_time}
+        stat={hours}
         unit='hours'
         changeSelected={changeSelected}
         selected={selected}
@@ -21,7 +21,7 @@ const TrainingCalendarSummaryText = ({
       <TrainingCalendarSummaryItem
         type='distance'
         stat={distance}
-        unit='miles'
+        unit={distance_unit}
         changeSelected={changeSelected}
         selected={selected}
       />

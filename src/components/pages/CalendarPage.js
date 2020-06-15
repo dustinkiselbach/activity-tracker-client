@@ -2,12 +2,14 @@ import React, { useState, useEffect, useContext } from 'react'
 import TrainingCalendarHeader from '../trainingCalendar/TrainingCalendarHeader'
 import TrainingCalendar from '../trainingCalendar/TrainingCalendar'
 import ActivitiesContext from '../../context/activities/activitiesContext'
+import ProfileContext from '../../context/profile/profileContext'
 
 const CalendarPage = () => {
   const [selected, setSelected] = useState('activity_time')
   const [year, setYear] = useState(2020)
 
   const activitiesContext = useContext(ActivitiesContext)
+  const profileContext = useContext(ProfileContext)
 
   const {
     getActivitiesByDate,
@@ -16,7 +18,10 @@ const CalendarPage = () => {
   } = activitiesContext
 
   useEffect(() => {
-    getActivitiesByDate(year)
+    getActivitiesByDate(
+      year,
+      !profileContext.imperialToggle ? 'metric' : 'imperial'
+    )
   }, [year])
 
   return (
