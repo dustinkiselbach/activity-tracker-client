@@ -1,63 +1,63 @@
-import React, { useState, useEffect, useContext } from 'react'
-import ActivitiesContext from '../../context/activities/activitiesContext'
-import UserContext from '../../context/user/userContext'
-import ProfileContext from '../../context/profile/profileContext'
+import React, { useState, useEffect, useContext } from "react";
+import ActivitiesContext from "../../context/activities/activitiesContext";
+import UserContext from "../../context/user/userContext";
+import ProfileContext from "../../context/profile/profileContext";
 
-import DashboardActivities from './DashboardActivities'
-import DashboardSidebar from './DashboardSidebar'
-import Toggler from '../common/Toggler'
+import DashboardActivities from "./DashboardActivities";
+import DashboardSidebar from "./DashboardSidebar";
+import Toggler from "../common/Toggler";
 
-import { useInView } from 'react-intersection-observer'
+import { useInView } from "react-intersection-observer";
 
 const stravaURL =
-  'https://www.strava.com/oauth/authorize?client_id=47703&redirect_uri=http://localhost:3000/auth/strava/code&response_type=code&scope=activity:read_all,activity:write'
+  "https://www.strava.com/oauth/authorize?client_id=47703&redirect_uri=http://localhost:3000/auth/strava/code&response_type=code&scope=activity:read_all,activity:write";
 
 const Dashboard = () => {
   const [ref, inView] = useInView({
     triggerOnce: true,
-    rootMargin: '400px 0px'
-  })
+    rootMargin: "400px 0px",
+  });
 
-  const [pages, setPages] = useState([1])
+  const [pages, setPages] = useState([1]);
 
-  const activitiesContext = useContext(ActivitiesContext)
+  const activitiesContext = useContext(ActivitiesContext);
   const {
     activities,
     pagination,
     syncActivities,
     getActivities,
-    loading
-  } = activitiesContext
+    loading,
+  } = activitiesContext;
 
-  const userContext = useContext(UserContext)
-  const { user } = userContext
+  const userContext = useContext(UserContext);
+  const { user } = userContext;
 
-  const profileContext = useContext(ProfileContext)
+  const profileContext = useContext(ProfileContext);
   const {
     profile,
     getProfile,
     changeUnitPreference,
-    imperialToggle
-  } = profileContext
+    imperialToggle,
+  } = profileContext;
 
   useEffect(() => {
     // have to set headers before stuff is fetched
     if (!userContext.loading && activities.length === 0) {
-      syncActivities()
-      getProfile(user.sub)
-      getActivities(1)
+      syncActivities();
+      getProfile(user.sub);
+      getActivities(1);
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userContext.loading])
+  }, [userContext.loading]);
 
   // if ref is in view add another item to array
 
   useEffect(() => {
     if (inView && pages.slice(-1)[0] !== pagination.total_pages) {
-      setPages([...pages, pages.slice(-1)[0] + 1])
+      setPages([...pages, pages.slice(-1)[0] + 1]);
     }
-  }, [inView])
+  }, [inView]);
 
   //  get the page based on last item of array
   //  boolean checking to make sure the pages
@@ -65,9 +65,9 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (inView && pages.length > activities.length) {
-      getActivities(pages.slice(-1)[0])
+      getActivities(pages.slice(-1)[0]);
     }
-  }, [pages])
+  }, [pages]);
 
   return (
     <>
@@ -79,12 +79,12 @@ const Dashboard = () => {
             <>
               <div className='sidebar'>
                 <div className='sidebar__top'>
-                  <h3>{!imperialToggle ? 'Metric' : 'Imperial'}</h3>
+                  <h3>{!imperialToggle ? "Metric" : "Imperial"}</h3>
                   <Toggler
-                    onClick={e => {
-                      e.preventDefault()
+                    onClick={(e) => {
+                      e.preventDefault();
 
-                      changeUnitPreference()
+                      changeUnitPreference();
                     }}
                     toggle={imperialToggle}
                   />
@@ -116,17 +116,17 @@ const Dashboard = () => {
             </>
           ) : (
             // there are no activities
-            <div>
-              You have no activities, please intergrate{' '}
+            <div className='container card card__main--left'>
+              You have no activities, please integrate
               <a href={stravaURL} className='btn'>
-                Intergrate
+                Integrate
               </a>
             </div>
           )}
         </section>
       )}
     </>
-  )
-}
+  );
+};
 
-export default Dashboard
+export default Dashboard;
