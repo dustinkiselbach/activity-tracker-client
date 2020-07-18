@@ -1,11 +1,24 @@
-import React, { useEffect, useContext } from "react";
+import React, { useContext } from "react";
+import StravaContext from "../../context/strava/stravaContext";
 
-const strava = () => {
+const Strava = () => {
+  const stravaContext = useContext(StravaContext);
+
+  const { integrateStrava } = stravaContext;
+
+  const stravaURL =
+    "https://www.strava.com/oauth/authorize?client_id=47703&redirect_uri=http://localhost:3000/auth/strava/code&response_type=code&scope=activity:read_all,activity:write";
+
   return (
     <div>
-      <h1>This is where the strava shit will go</h1>
+      <div className='container card card__main--left'>
+        Hello
+        <a href={stravaURL} className='btn'>
+          Integrate
+        </a>
+      </div>
     </div>
   );
 };
 
-export default strava;
+export default Strava;
