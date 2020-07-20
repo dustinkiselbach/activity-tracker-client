@@ -1,21 +1,21 @@
-import React, { useContext, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
-import UserContext from "../../context/user/userContext";
-import classnames from "classnames";
-import NavUser from "./NavUser";
-import { AnimatePresence } from "framer-motion";
+import React, { useContext, useState } from 'react'
+import { Link, NavLink } from 'react-router-dom'
+import UserContext from '../../context/user/userContext'
+import classnames from 'classnames'
+import NavUser from './NavUser'
+import { AnimatePresence } from 'framer-motion'
 
 const Navbar = () => {
-  const userContext = useContext(UserContext);
+  const userContext = useContext(UserContext)
 
-  const { isAuthenticated, logoutUser, user } = userContext;
+  const { isAuthenticated, logoutUser, user } = userContext
 
-  const [toggleNav, setToggleNav] = useState(false);
+  const [toggleNav, setToggleNav] = useState(false)
 
   const showUserNav = (e) => {
-    e.preventDefault();
-    setToggleNav(!toggleNav);
-  };
+    e.preventDefault()
+    setToggleNav(!toggleNav)
+  }
 
   const authLinks = (
     <>
@@ -23,7 +23,7 @@ const Navbar = () => {
         <p>{user && user.email} </p>
         <span
           onClick={showUserNav}
-          className={classnames("material-icons", {
+          className={classnames('material-icons', {
             toggled: toggleNav,
           })}
         >
@@ -34,7 +34,7 @@ const Navbar = () => {
         </AnimatePresence>
       </li>
     </>
-  );
+  )
 
   const guestLinks = (
     <>
@@ -45,7 +45,7 @@ const Navbar = () => {
         <Link to='/login'>Login</Link>
       </li>
     </>
-  );
+  )
 
   return (
     <>
@@ -81,7 +81,7 @@ const Navbar = () => {
         </ul>
       </nav>
     </>
-  );
-};
+  )
+}
 
-export default Navbar;
+export default Navbar

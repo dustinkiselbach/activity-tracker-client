@@ -1,11 +1,11 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
-import { motion } from "framer-motion";
+import React from 'react'
+import { NavLink } from 'react-router-dom'
+import { motion } from 'framer-motion'
 
 const transition = {
   duration: 0.2,
   ease: [0.6, 0.05, -0.01, 0.9],
-};
+}
 
 const variants = {
   hidden: {
@@ -18,7 +18,7 @@ const variants = {
     y: 0,
     transition,
   },
-};
+}
 
 const NavUser = ({ logoutUser }) => {
   return (
@@ -44,7 +44,7 @@ const NavUser = ({ logoutUser }) => {
         <NavLink to='/strava'>Strava</NavLink>
       </li>
     </motion.ul>
-  );
-};
+  )
+}
 
-export default NavUser;
+export default NavUser

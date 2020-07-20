@@ -1,29 +1,29 @@
-import React, { useState, useContext, useEffect } from "react";
-import SettingsNav from "./SettingsNav";
-import SettingsProfile from "./SettingsProfile";
-import ProfileContext from "../../context/profile/profileContext";
-import SettingsDisplay from "./SettingsDisplay";
-import SettingsAccount from "./SettingsAccount";
+import React, { useState, useContext, useEffect } from 'react'
+import SettingsNav from './SettingsNav'
+import SettingsProfile from './SettingsProfile'
+import ProfileContext from '../../context/profile/profileContext'
+import SettingsDisplay from './SettingsDisplay'
+import SettingsAccount from './SettingsAccount'
 
 const navItems = [
   {
-    title: "My Profile",
-    id: "profile",
+    title: 'My Profile',
+    id: 'profile',
   },
   {
-    title: "My Account",
-    id: "account",
+    title: 'My Account',
+    id: 'account',
   },
   {
-    title: "Display Preferences",
-    id: "display",
+    title: 'Display Preferences',
+    id: 'display',
   },
-];
+]
 
 const Settings = () => {
-  const [selected, setSelected] = useState("profile");
+  const [selected, setSelected] = useState('profile')
 
-  const profileContext = useContext(ProfileContext);
+  const profileContext = useContext(ProfileContext)
 
   const {
     profile,
@@ -32,7 +32,7 @@ const Settings = () => {
     updateProfile,
     getBiometrics,
     setBiometrics,
-  } = profileContext;
+  } = profileContext
   // can only update name, email weight height
   // const updatableProfile = {
   //   weight: profile.weight,
@@ -40,17 +40,17 @@ const Settings = () => {
   // }
 
   useEffect(() => {
-    getUserProfile();
-    getBiometrics();
-  }, []);
+    getUserProfile()
+    getBiometrics()
+  }, [])
 
-  let updatableProfile;
+  let updatableProfile
 
   if (biometrics) {
     updatableProfile = {
       weight: biometrics[0].weight,
       height: biometrics[0].height,
-    };
+    }
   }
 
   return (
@@ -63,22 +63,22 @@ const Settings = () => {
             selected={selected}
           />
           <div className='settings-main'>
-            {selected === "profile" && (
+            {selected === 'profile' && (
               <SettingsProfile
                 profile={updatableProfile}
                 updateProfile={setBiometrics}
                 id={profile.id}
               />
             )}
-            {selected === "account" && (
+            {selected === 'account' && (
               <SettingsAccount profile={updatableProfile} />
             )}
-            {selected === "display" && <SettingsDisplay />}
+            {selected === 'display' && <SettingsDisplay />}
           </div>
         </section>
       )}
     </>
-  );
-};
+  )
+}
 
-export default Settings;
+export default Settings
