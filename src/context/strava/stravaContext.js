@@ -1,5 +1,5 @@
-import { createContext } from "react";
+import { createContext } from 'react'
 
-const stravaContext = createContext();
+const stravaContext = createContext()
 
-export default stravaContext;
+export default stravaContext
