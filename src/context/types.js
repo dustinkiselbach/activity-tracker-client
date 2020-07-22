@@ -18,6 +18,7 @@ export const SET_UNIT_PREFERENCE = 'SET_UNIT_PREFERENCE'
 export const SET_LOADING = 'SET_LOADING'
 // Strava Types
 export const CHECK_AUTH = 'CHECK_AUTH'
+export const AUTH_INVALID = 'AUTH_INVALID'
 export const DISCONNECT_STRAVA = 'DISCONNECT_STRAVA'
 // Profile Types
 export const GET_PROFILE = 'GET_PROFILE'

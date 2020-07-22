@@ -2,7 +2,12 @@ import React, { useReducer } from 'react'
 import axios from 'axios'
 import stravaReducer from './stravaReducer'
 import StravaContext from './stravaContext'
-import { CHECK_AUTH, SET_LOADING, DISCONNECT_STRAVA } from '../types'
+import {
+  CHECK_AUTH,
+  AUTH_INVALID,
+  SET_LOADING,
+  DISCONNECT_STRAVA,
+} from '../types'
 
 const StravaState = (props) => {
   const initialState = {
@@ -44,18 +49,26 @@ const StravaState = (props) => {
       console.log(res)
       dispatch({ type: CHECK_AUTH })
     } catch (err) {
+      dispatch({ type: AUTH_INVALID })
       console.log(err.response.data)
       throw err
     }
   }
 
   // disconnect strava
-  const disconnectStrava = () => {
+  const disconnectStrava = async () => {
     setLoading()
 
-    setTimeout(() => {
+    try {
+      const res = await axios.delete(
+        'https://agile-retreat-42559.herokuapp.com/api/v1/auth'
+      )
+      console.log(res)
       dispatch({ type: DISCONNECT_STRAVA })
-    }, 1000)
+    } catch (err) {
+      console.log(err.response.data)
+      throw err
+    }
   }
 
   return (

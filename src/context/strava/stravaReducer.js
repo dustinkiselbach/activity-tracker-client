@@ -1,4 +1,9 @@
-import { CHECK_AUTH, SET_LOADING, DISCONNECT_STRAVA } from '../types'
+import {
+  CHECK_AUTH,
+  SET_LOADING,
+  DISCONNECT_STRAVA,
+  AUTH_INVALID,
+} from '../types'
 
 export default (state, action) => {
   switch (action.type) {
@@ -6,6 +11,12 @@ export default (state, action) => {
       return {
         ...state,
         authenticated: true,
+        loading: false,
+      }
+    case AUTH_INVALID:
+      return {
+        ...state,
+        authenticated: false,
         loading: false,
       }
     case SET_LOADING:
