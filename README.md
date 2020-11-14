@@ -1,3 +1,5 @@
+The Front End for an activity tracking web application. Users sign up and integrate with the Strava's Api to gain access to enhanced metrics. It features robust data visualization including a calendar with distance, activity time, and number of activities. The project is built with reactJS, and uses FramerMotion for transitions and VictoryCharts for data visualizations. It also features many custom UI components.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
